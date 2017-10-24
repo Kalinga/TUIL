@@ -13,5 +13,15 @@ Leads to the problem: small change in Requirements needs understanding and modif
 Preventing code Reuse: A component with core business logic, usually bundled with with system requirements e.g. Logging,
 performance mesurement, etc..
 
-And Aspect Oriented Programming/Engineering is an approach to software developement to address this problem.
-Aspect oriented programming can help in writing reusable software components and develope easily maintainable softwares.
+And Aspect Oriented Software Programming(AOSP)/Engineering(AOSE) is an approach to software developement to address this
+problem. Aspect oriented programming can help in writing reusable software components and develope easily maintainable softwares.
+
+AOSP is based on an abstraction Called "Aspect" simillar to Object/Class, Method/Procedure. Aspect encapsulate the
+functionalties which cross-cut(spread across multiple components) and coexists with other functionalities of the system.
+
+An aspect can be viewed as combination of implementaion of cross-cut and definition of where these should be included in the 
+programm. e.g. aspects can be included before, after a certain method call or when an attribute is accessed.
+
+An executable of the AOSP is created by the language toolchain by inter weaving the objects, methods and aspects in
+accordance with a specification which is necessarily part of the source code.
+[Picture 1]Aspect is woven into the core program during an executable is produced and that can be viewed as a agumented system.
