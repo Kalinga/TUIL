@@ -1,0 +1,17 @@
+Sommerville's Software Engineeering
+Chapter #21
+---------------------------------------
+
+Aspect oriented software Engineering is different software engineering paradigm than conventional software enginerring
+methodologies such as structural, object oriented, object based software engineering. Though it has its root in object
+orineted software engineering it is not being used as widely as object oriented software engineering methods are used.
+Aspect oriented software engineering is mainly achvied by "Aspect orineted programming". To achieve this new approach
+of programming there shall be introduction of four new terminologies, for the understanding of the new semantics.
+
+Many-to-many relationship exits between Requirements and Components in large systems.
+Leads to the problem: small change in Requirements needs understanding and modifying multiple componets.
+Preventing code Reuse: A component with core business logic, usually bundled with with system requirements e.g. Logging,
+performance mesurement, etc..
+
+And Aspect Oriented Programming/Engineering is an approach to software developement to address this problem.
+Aspect oriented programming can help in writing reusable software components and develope easily maintainable softwares.
