@@ -25,3 +25,19 @@ programm. e.g. aspects can be included before, after a certain method call or wh
 An executable of the AOSP is created by the language toolchain by inter weaving the objects, methods and aspects in
 accordance with a specification which is necessarily part of the source code.
 [Picture 1]Aspect is woven into the core program during an executable is produced and that can be viewed as a agumented system.
+
+Aspect prevents accidental errors, user need not serach every place in the software code base when there is a modification 
+to a requirement. Such modification information can be included into the Aspect(such as where the code is supposed to woven into)
+and aspect inter weaving proces takes care of applying it correctly.
+
+There are several attempts made to implement the AOP(Aspect Oriented Programming) paradigm into a programming language or as a 
+language  extension. Out of them AspectJ is notable one which is an extension to the Java programming language and originated from 
+XEROX' PARC.
+
+As many good discoveries come with side effects, there are also trade off in AOP. The cross cutting concerns create problems at
+the latter stages of the software development life cycle. There are researches going on how to utilize aspect orinetation in the 
+other areas of software engineering such as system requirement engineering, system design, how to test and debug the aspect
+oriented software programs.
+
+[References]
+https://en.wikipedia.org/wiki/AspectJ
