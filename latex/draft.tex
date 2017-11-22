@@ -1,0 +1,55 @@
+\documentclass[12pt]{article}
+\usepackage{hyperref}   % hypertext links, URLs
+
+\setlength{\baselineskip}{16.0pt}    % 16 pt usual spacing between lines
+\setlength{\parskip}{3pt plus 2pt}
+\setlength{\parindent}{10pt}
+\setlength{\oddsidemargin}{0.5cm}
+\setlength{\evensidemargin}{0.5cm}
+\setlength{\marginparsep}{0.75cm}
+\setlength{\marginparwidth}{2.5cm}
+\setlength{\marginparpush}{1.0cm}
+\setlength{\textwidth}{150mm}
+
+\begin{document}
+
+\begin{center}
+{\large Variation of Euclidian Algorithhm for finding gcd of two numbers} \\
+\copyright 2017 by Kalinga Bhusan Ray \\
+November 15, 2017 \\
+Ilmenau, Germany \\
+\author{Kalinga Bhusan Ray}
+\end{center}
+
+\section{Introduction}
+Finding gcd(greatest common divisor) is very basic to the elementary mathematics, 
+and the methodology for finding that, was initially formulated by the famous greek mathematician Euclid. This methodology for finding greatest common divisor for two natual numbers is otherwise known as Euclidian algorithim for finding gcd of two 
+natural numbers. The definition for the Euclidian algorithim can be seen as below.
+
+\textbf {Euclid's Rule} \textit {If x and y are positive integers with x $\geq$ y,
+ then} \break \vspace{0mm} \hspace{4cm} gcd(x, y) = gcd(x mod y, y).
+
+An algorithm based on above definition can be found from text book [1] as fllow.
+
+\textbf {Euclid's algorithm for finding the greatest common divisor of two numbers.}
+
+\underline {function Euclid}(a, b)
+Input: Two integers a nad b with a $\geq$ b $\geq$ 0
+Output: gcd(a, b)
+
+if b = 0: return a
+return Euclid(a, b)
+
+
+\begin{thebibliography}{6}
+
+\bibitem{latex}S. Dasgupta, C. Papadimitriou and U. Vazirani, \textsl{Algorithims
+},
+first edition, Mc Graw Hill(2008).
+
+\bibitem{website}Some useful links are given at \url{https://gmplib.org/manual/Greatest-Common-Divisor-Algorithms.html}.
+
+\end{thebibliography}
+
+
+\end{document}
