@@ -39,15 +39,39 @@ natural numbers. The definition for the Euclidian algorithim can be seen as belo
 \newline if b=0: return a
 \newline return Euclid(b, a mod b)
 \newline 
-\newline From the above compact algorithm, it can be noticed, the algoritm is based on recursive approach to solve the problem and usage of mathematical modulus operator(\textit {mod} in short)
-For two integers a and b, the working of modulus operator can be explained as follows.
-For a > b, a mod b = r,  such that b>r and  a = q * b + r, q is the quotient of the division of a and b and the r is the remainder of the said division. When the remainder is 0, then a is said to be divisible by b.
+\newline From the above compact algorithm, it can be noticed, the algoritm is based on recursive approach to solve the problem and usage of mathematical modulus operator(\textit {mod} in short).
+For two integers \texttt{a} and \texttt{b}, the working of modulus operator can be explained as follows.
+For \texttt{a} > \texttt{b}, \texttt{a} mod \texttt{b} = \texttt{r},  such that \texttt{b}>\texttt{r} and  \texttt{a} = \texttt{q} * \texttt{b} + \texttt{r}, \texttt{q} is the quotient of the division of \texttt{a} and \texttt{b} and the \texttt{r} is the remainder of the said division. When the remainder is \texttt{0}, then \texttt{a} is said to be divisible by \texttt{b}.
 
-So from the mentioned algorithm it is quite evidnet that, the remainder (\textit{r}) of the modulus operation is being treated as one of the input of subsequent recursive function call, and also happens to be the smallest of the two parameters.
+So from the mentioned algorithm it is quite evidnet that, the remainder (\texttt{•}{r}) of the modulus operation is being treated as one of the input of subsequent recursive function call, and also happens to be the \textbf{smallest} of the two parameters.
 
-The main purpose of this paper is to show whether this number \textit{r} is unique for our \textit{gcd} algorithm purpose, or there exist another number that can also substituted for this number?
+\section{Purpose}
+The main purpose of this paper is to show whether this number \texttt{r} is unique for our \textit{gcd} algorithm purpose, or there exist another number that can also be substituted for this number?
 
-Yes a close look at the way modulus operator works gives the answer, there exist another  number \textit{s}, \textit{s} $\neq$ \textit{r}, that can be substituted in the algorithm without affecting the final result. And the number \textit{s} can be expressed as below
+There is a very interesting property exhibited by modular arithimatic.
+When we perform modular arithimatic such as \texttt{a} mod \texttt{b}, there exists
+\texttt{b} number of equivalence classes, and all elements in one equivalcence give same result on modulo operation with \texttt{b} and such equivalent element can be substituted for each other when performing modulo \texttt{b}.
+\newline
+Considering an actual value for \texttt{b} to be 5, we can have below 5 equivaleance classes.
+
+\begin{table}[h!]
+\centering
+	\begin{tabular}{c c c c c c}
+		... & -5 & 0 & 5 & 10 & ... \\
+		... & -4 & 1 & 6 & 11 & ... \\
+		... & -3 & 2 & 7 & 12 & ... \\
+		... & -2 & 3 & 8 & 13 & ... \\
+		... & -1 & 4 & 9 & 14 & ...
+	\end{tabular}
+\caption{Table showing equivalence class for modulo 3 on integers}
+\label{table:1}
+\end{table}
+
+And from the table it is clear that for modulo 5, the numbers 7 and 12 behaves exactly same. And mathematically they as denoted as congruent to each other for modulo 5.
+Symbolically it can be represented as, \texttt{7} $\equiv$ \texttt{12} (mod \texttt{5}).
+So when, the modulo \texttt{b} give same \texttt{r} for a set of different numbers, finding and studying the equivalance for \texttt{r} was enticing.
+
+Yes, a closer look at the way modulus operator works gives the answer, there exist another  number \texttt{s}, \texttt{s} $\neq$ \texttt{r}, that can be substituted in the algorithm involving further recusrsive modulus, without affecting the final result. And the number \textit{s} can be expressed as below
 \newline \vspace{0mm} \hspace{4cm} \textit{s} = $ (\ $ $\lceil$ a/b $\rceil$  $\times $ b $\ )$ - b
 \newline \textit{r} can be expressed as simmilary as below
 \newline \vspace{0mm} \hspace{4cm}\textit{r} = b - $ (\ $ $\lfloor$ a/b $\rfloor$  $\times $ b $\ )$
@@ -81,6 +105,31 @@ Let's look at a more detailed algorithm, iterative in nature and presented in a 
 
 Let's consider the intitial values for the variables \texttt{a} and \texttt{b} populated in the line 3 and 5 from the input values to the algorithm $n$, and $m$ be (a\textsubscript{0}, b\textsubscript{0}). In the line number 8 it can be noticed that; for each iteration in the loop we have new sequence of (a, b) and for the i\textsuperscript{th} iteration we can formulate a\textsubscript{i} = b\textsubscript{i-1}, b\textsubscript{i} = a\textsubscript{i-1} mod b\textsubscript{i-1}, for $1 \geq i \geq t$, and b\textsubscript{t} = 0
 
+\begin{table}[h!]
+\centering
+	\begin{tabular}{c | c | c}
+		\hline
+		$i$ & $a\textsubscript{i}$ & $b\textsubscript{i}$ \\ [0.5ex] 
+		\hline
+		0 & 12742 & 10534 \\ 
+		1 & 10534 & 2208 \\  
+		2 & 2208  & 1702 \\
+		3 & 1702  & 506 \\
+		4 & 506   & 184 \\
+		5 & 184   & 138 \\
+		6 & 138   & 46 \\
+		7 & 46    & 0
+	\end{tabular}
+\caption{Table showing intermediate values while calculating \textbf{gcd} for (10534, 12742)}
+\label{table:2}
+\end{table}
+
+For \textbf{t} = 7, b\textsubscript{t} = 0 and the algorithm exits with the return value 
+46 as the gcd for (12742, 10534).
+
+\section{Alternative Approach using 's'}
+Now the question raises, what is the significance of this \texttt{s} over \texttt{r}.
+If we analyse the Euclidian algorithm for finding greatest common divisor, it is quite evident that, the arguments are getting reduced and one of them reduced till 0 when finally the output of the algorithm is obtained. So it is quite natural that if \texttt{s} can be \texttt{r} then finding the smallest of them at each recursive call and using it for the subsequent recursion can optimise. 
 
 \begin{thebibliography}{6}
 
