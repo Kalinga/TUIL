@@ -1,5 +1,8 @@
 \documentclass[12pt]{article}
+\usepackage[T1]{fontenc}
 \usepackage{hyperref}   % hypertext links, URLs
+\usepackage{algorithm}
+\usepackage{algorithmic}
 
 \setlength{\baselineskip}{16.0pt}    % 16 pt usual spacing between lines
 \setlength{\parskip}{3pt plus 2pt}
@@ -25,20 +28,58 @@ Ilmenau, Germany \\
 Finding gcd(greatest common divisor) is very basic to the elementary mathematics, 
 and the methodology for finding that, was initially formulated by the famous greek mathematician Euclid. This methodology for finding greatest common divisor for two natual numbers is otherwise known as Euclidian algorithim for finding gcd of two 
 natural numbers. The definition for the Euclidian algorithim can be seen as below.
-
-\textbf {Euclid's Rule} \textit {If x and y are positive integers with x $\geq$ y,
+\newline \newline \textbf {Euclid's Rule} \textit {If x and y are positive integers with x $\geq$ y,
  then} \break \vspace{0mm} \hspace{4cm} gcd(x, y) = gcd(x mod y, y).
+\newline 
+\newline An algorithm based on above definition can be found from text book [1] as follow.
+\newline \textbf {Euclid's algorithm for finding the greatest common divisor of two numbers.}\newline \underline {function Euclid}(a, b)
+\newline Input: Two integers a and b with a $\geq$ b $\geq$ 0 
+\newline Output: gcd(a, b)
+\newline
+\newline if b=0: return a
+\newline return Euclid(b, a mod b)
+\newline 
+\newline From the above compact algorithm, it can be noticed, the algoritm is based on recursive approach to solve the problem and usage of mathematical modulus operator(\textit {mod} in short)
+For two integers a and b, the working of modulus operator can be explained as follows.
+For a > b, a mod b = r,  such that b>r and  a = q * b + r, q is the quotient of the division of a and b and the r is the remainder of the said division. When the remainder is 0, then a is said to be divisible by b.
 
-An algorithm based on above definition can be found from text book [1] as fllow.
+So from the mentioned algorithm it is quite evidnet that, the remainder (\textit{r}) of the modulus operation is being treated as one of the input of subsequent recursive function call, and also happens to be the smallest of the two parameters.
 
-\textbf {Euclid's algorithm for finding the greatest common divisor of two numbers.}
+The main purpose of this paper is to show whether this number \textit{r} is unique for our \textit{gcd} algorithm purpose, or there exist another number that can also substituted for this number?
 
-\underline {function Euclid}(a, b)
-Input: Two integers a nad b with a $\geq$ b $\geq$ 0
-Output: gcd(a, b)
+Yes a close look at the way modulus operator works gives the answer, there exist another  number \textit{s}, \textit{s} $\neq$ \textit{r}, that can be substituted in the algorithm without affecting the final result. And the number \textit{s} can be expressed as below
+\newline \vspace{0mm} \hspace{4cm} \textit{s} = $ (\ $ $\lceil$ a/b $\rceil$  $\times $ b $\ )$ - b
+\newline \textit{r} can be expressed as simmilary as below
+\newline \vspace{0mm} \hspace{4cm}\textit{r} = b - $ (\ $ $\lfloor$ a/b $\rfloor$  $\times $ b $\ )$
+\newline So we have \{ \textit{r}, \textit{s} \} $\in$ \textbf{G}, \textit{r}, \textit{s} $<$ \textit{b}, which can be used as one of the input to the Algorithm. 
+\newline We can otherwise say, the elements of \textbf{G} exhibits \textit{isomorphic }  behaviour.
 
-if b = 0: return a
-return Euclid(a, b)
+Let's look at a more detailed algorithm, iterative in nature and presented in a book by M. Dietzfelbinger, and is based on the previously mentioned Euclid's algorithm which is recursive in nature but the principle remains same.
+\newline
+\newline \textbf{GCD Algorithm (Euclidean Algorithm)}
+\newline INPUT: Two integers n, m
+\newline METHOD:
+
+%\algsetup{
+%	indent=1em,	
+%	linenosize=\small,
+%	linenodelimiter=.
+%}
+
+\begin{algorithmic}[1]
+\STATE a, b: integer
+\IF{$|n| \geq |m|$}
+	\STATE $a \gets |n|; b \gets |m|;$
+\ELSE
+	\STATE $b \gets |m|; a \gets |n|;$
+\ENDIF
+\WHILE{$b > 0$ } 
+	\STATE $(a, b) \leftarrow (b, a  $ $mod $ $b);$
+\ENDWHILE
+\RETURN a
+\end {algorithmic}
+
+Let's consider the intitial values for the variables \texttt{a} and \texttt{b} populated in the line 3 and 5 from the input values to the algorithm $n$, and $m$ be (a\textsubscript{0}, b\textsubscript{0}). In the line number 8 it can be noticed that; for each iteration in the loop we have new sequence of (a, b) and for the i\textsuperscript{th} iteration we can formulate a\textsubscript{i} = b\textsubscript{i-1}, b\textsubscript{i} = a\textsubscript{i-1} mod b\textsubscript{i-1}, for $1 \geq i \geq t$, and b\textsubscript{t} = 0
 
 
 \begin{thebibliography}{6}
