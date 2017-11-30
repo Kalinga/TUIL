@@ -32,6 +32,7 @@ natural numbers. The definition for the Euclidian algorithim can be seen as belo
  then} \break \vspace{0mm} \hspace{4cm} gcd(x, y) = gcd(x mod y, y).
 \newline 
 \newline An algorithm based on above definition can be found from text book [1] as follow.
+\newline \textbf{Algorithm 1:}
 \newline \textbf {Euclid's algorithm for finding the greatest common divisor of two numbers.}\newline \underline {function Euclid}(a, b)
 \newline Input: Two integers a and b with a $\geq$ b $\geq$ 0 
 \newline Output: gcd(a, b)
@@ -73,13 +74,14 @@ So when, the modulo \texttt{b} give same \texttt{r} for a set of different numbe
 
 Yes, a closer look at the way modulus operator works gives the answer, there exist another  number \texttt{s}, \texttt{s} $\neq$ \texttt{r}, that can be substituted in the algorithm involving further recusrsive modulus, without affecting the final result. And the number \textit{s} can be expressed as below
 \newline \vspace{0mm} \hspace{4cm} \textit{s} = $ (\ $ $\lceil$ a/b $\rceil$  $\times $ b $\ )$ - b
-\newline \textit{r} can be expressed as simmilary as below
+\newline \textit{r} can be expressed simmilary as below
 \newline \vspace{0mm} \hspace{4cm}\textit{r} = b - $ (\ $ $\lfloor$ a/b $\rfloor$  $\times $ b $\ )$
 \newline So we have \{ \textit{r}, \textit{s} \} $\in$ \textbf{G}, \textit{r}, \textit{s} $<$ \textit{b}, which can be used as one of the input to the Algorithm. 
 \newline We can otherwise say, the elements of \textbf{G} exhibits \textit{isomorphic }  behaviour.
 
 Let's look at a more detailed algorithm, iterative in nature and presented in a book by M. Dietzfelbinger, and is based on the previously mentioned Euclid's algorithm which is recursive in nature but the principle remains same.
 \newline
+\newline \textbf{Algorithm 2:}
 \newline \textbf{GCD Algorithm (Euclidean Algorithm)}
 \newline INPUT: Two integers n, m
 \newline METHOD:
@@ -127,17 +129,91 @@ Let's consider the intitial values for the variables \texttt{a} and \texttt{b} p
 For \textbf{t} = 7, b\textsubscript{t} = 0 and the algorithm exits with the return value 
 46 as the gcd for (12742, 10534).
 
+Now it is the time to see the results when the claim made in this paper is being applied 
+to the alorithm. According to the claim, instead of the remainder of the division, the seek value (\texttt{s}) that could make the dividend a multiple of divisor, which is same as difference between divisor and remainder, can be used in the algorithm without affecting the result. So we can modify line no. 8 of the Algorithm 2 by using a modified implementaion of \texttt{mod} and we call it \texttt{mod'} and can be expressed as below. Let's name this modified algorithm as algorithm no: 3 .  \linebreak
+\textit{a} mod' \textit{b} = \textit{s}, where  \textit{s} = \textit{b - r}, \textit{r} = \textit{a} mod \textit{b}
+
+The values obtained during the intermediate steps captured for the algorithm no: 3 in following table is presented for the reference.
+
+\begin{table}[h!]
+\centering
+	\begin{tabular}{c | c | c | c}
+		\hline
+		$i$ & $a\textsubscript{i}$ & $b\textsubscript{i} using s$ & $coresponding r$\\ [0.5ex] 
+		\hline
+		0 & 12742 & 10534 & na  \\ 
+		1 & 10534 & 8326  & 2208\\  
+		2 & 8326  & 6118  & 2208\\
+		3 & 6118  & 3910  & 2208\\
+		4 & 3910   & 1702 & 2208\\
+		5 & 1702   & 1196 & 506\\
+		6 & 1196   & 690  & 506\\
+		7 & 690    & 184  & 506\\
+		8 & 184    & 46   & 138\\
+		9 & 46     & 0    & na
+	\end{tabular}
+\caption{Table showing intermediate values while calculating \textbf{gcd} for (10534, 12742)}
+\label{table:3}
+\end{table}
+
+If we compare the contents of table 2 and 3, we could see some common numbers and some of them differs. One could also observe that in the table 3 we have two more entries, that's because the algorithm takes two more recursion to complete. This is because for 
+this combination of numbers we have received 6 times \texttt{s} > \texttt{r} and 2 times 
+\texttt{s} < \texttt{r}. But for other combination of numbers, the scenario could be different.
+
 \section{Alternative Approach using 's'}
 Now the question raises, what is the significance of this \texttt{s} over \texttt{r}.
-If we analyse the Euclidian algorithm for finding greatest common divisor, it is quite evident that, the arguments are getting reduced and one of them reduced till 0 when finally the output of the algorithm is obtained. So it is quite natural that if \texttt{s} can be \texttt{r} then finding the smallest of them at each recursive call and using it for the subsequent recursion can optimise. 
+If we analyse the Euclidian algorithm for finding greatest common divisor, it is quite evident that, the arguments are getting reduced and one of them reduced till 0 when finally the output of the algorithm is obtained. So it is quite natural that if \texttt{s} can be substituted  for \texttt{r} then finding the smallest of them at each recursive call and using it for the subsequent recursion can help the recursion bringing the operand closer to 0 more quickly. The modified algorithm can be presented below.
+\newline \textbf{Algorithm 4:}
+\begin{algorithmic}[1]
+\STATE a, b: integer
+\IF{$|n| \geq |m|$}
+	\STATE $a \gets |n|; b \gets |m|;$
+\ELSE
+	\STATE $b \gets |m|; a \gets |n|;$
+\ENDIF
+\WHILE{$b > 0$ } 
+	\STATE $(a, b) \leftarrow (b, a  $ $mod'' $ $b);$
+\ENDWHILE
+\RETURN a
+\end {algorithmic}
+
+So it can be noted from the above that there is apparent no change from the previously given algorithm except line no. 8. The modified algorithm uses $mod'$ instead of \texttt{mod} for the modulus operation. This $mod''$ can be expressed as below.
+If \textit{r} = \textit{a} mod \textit{b}, \textit{s} = \textit{b - r}
+\textit{a} mod'' \textit{b} = min(r, s), where \textit{min} is the function returns the least of the arguments.
+
+The values obtained during the intermediate steps captured for the algorithm no: 3 in following table is presented for the reference.
+
+\begin{table}[h!]
+\centering
+	\begin{tabular}{c | c | c | c| c}
+	\hline
+	$i$ & $a\textsubscript{i}$ & $b\textsubscript{i} = min(r,s)$ & $r$ & $s$\\ [0.5ex] 
+	\hline
+		0 & 12742 & 10534 & na   & na \\ 
+		1 & 10534 & 2208  & 2208 & 8326\\  
+		2 & 2208  & 506   & 1702 & 506\\
+		3 & 506   & 184   & 184  & 322\\
+		4 & 184   & 46    & 138  & 46\\
+		5 & 46    & 0     & na   & na
+	\end{tabular}
+\caption{Table showing intermediate values while calculating \textbf{gcd} for (10534, 12742)}
+\label{table:4}
+\end{table}
+
+\section{Conclusion}
+From the table 4 contents it is clear that by using the \texttt{min(r,s)} is advantageous and bring down the number of recursion. And also it is proved that we have a substitute for \texttt{r} in the context of modulos arithmatic and which can be used within the intermediate steps of the algorithm to find gcd of two numbers. The order of optimisation is still under investigation and could be significant when we integers with very very long digits may be in the order of thousands!
+
 
 \begin{thebibliography}{6}
 
 \bibitem{latex}S. Dasgupta, C. Papadimitriou and U. Vazirani, \textsl{Algorithims
 },
 first edition, Mc Graw Hill(2008).
+\bibitem{latex}Martin Dietzfelbinger \textsl{Primality Testing in Polynomial Time
+},
+first edition, Springer(2004).
 
-\bibitem{website}Some useful links are given at \url{https://gmplib.org/manual/Greatest-Common-Divisor-Algorithms.html}.
+\bibitem{website}The GNU Multiple Precision Arithmetic Library \url{https://gmplib.org/manual/Greatest-Common-Divisor-Algorithms.html (Accessed 15th Nov' 2017)}.
 
 \end{thebibliography}
 
