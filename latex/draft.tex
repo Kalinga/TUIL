@@ -17,7 +17,7 @@
 \begin{document}
 
 \begin{center}
-{\large Variation of Euclidian Algorithhm for finding gcd of two numbers} \\
+{\large Variation of Euclidean Algorithm for finding gcd of two numbers} \\
 \copyright 2017 by Kalinga Bhusan Ray \\
 November 15, 2017 \\
 Ilmenau, Germany \\
@@ -26,8 +26,8 @@ Ilmenau, Germany \\
 
 \section{Introduction}
 Finding gcd(greatest common divisor) is very basic to the elementary mathematics, 
-and the methodology for finding that, was initially formulated by the famous greek mathematician Euclid. This methodology for finding greatest common divisor for two natual numbers is otherwise known as Euclidian algorithim for finding gcd of two 
-natural numbers. The definition for the Euclidian algorithim can be seen as below.
+and the methodology for finding that, was initially formulated by the famous Greek mathematician Euclid. This methodology for finding greatest common divisor for two natural numbers is otherwise known as Euclidean Algorithm for finding gcd of two 
+natural numbers. The definition for the Euclidean Algorithm can be seen as below.
 \newline \newline \textbf {Euclid's Rule} \textit {If x and y are positive integers with x $\geq$ y,
  then} \break \vspace{0mm} \hspace{4cm} gcd(x, y) = gcd(x mod y, y).
 \newline 
@@ -40,20 +40,20 @@ natural numbers. The definition for the Euclidian algorithim can be seen as belo
 \newline if b=0: return a
 \newline return Euclid(b, a mod b)
 \newline 
-\newline From the above compact algorithm, it can be noticed, the algoritm is based on recursive approach to solve the problem and usage of mathematical modulus operator(\textit {mod} in short).
+\newline From the above compact algorithm, it can be noticed, the algorithm is based on recursive approach to solve the problem and usage of mathematical modulus operator(\textit {mod} in short).
 For two integers \texttt{a} and \texttt{b}, the working of modulus operator can be explained as follows.
 For \texttt{a} > \texttt{b}, \texttt{a} mod \texttt{b} = \texttt{r},  such that \texttt{b}>\texttt{r} and  \texttt{a} = \texttt{q} * \texttt{b} + \texttt{r}, \texttt{q} is the quotient of the division of \texttt{a} and \texttt{b} and the \texttt{r} is the remainder of the said division. When the remainder is \texttt{0}, then \texttt{a} is said to be divisible by \texttt{b}.
 
-So from the mentioned algorithm it is quite evidnet that, the remainder (\texttt{•}{r}) of the modulus operation is being treated as one of the input of subsequent recursive function call, and also happens to be the \textbf{smallest} of the two parameters.
+So from the mentioned algorithm it is quite evident that, the remainder (\texttt{•}{r}) of the modulus operation is being treated as one of the input of subsequent recursive function call, and also happens to be the \textbf{smallest} of the two parameters.
 
 \section{Purpose}
 The main purpose of this paper is to show whether this number \texttt{r} is unique for our \textit{gcd} algorithm purpose, or there exist another number that can also be substituted for this number?
 
-There is a very interesting property exhibited by modular arithimatic.
-When we perform modular arithimatic such as \texttt{a} mod \texttt{b}, there exists
-\texttt{b} number of equivalence classes, and all elements in one equivalcence give same result on modulo operation with \texttt{b} and such equivalent element can be substituted for each other when performing modulo \texttt{b}.
+There is a very interesting property exhibited by modular arithmetic.
+When we perform modular arithmetic such as \texttt{a} mod \texttt{b}, there exists
+\texttt{b} number of equivalence classes, and all elements in one equivalence give same result on modulo operation with \texttt{b} and such equivalent element can be substituted for each other when performing modulo \texttt{b}.
 \newline
-Considering an actual value for \texttt{b} to be 5, we can have below 5 equivaleance classes.
+Considering an actual value for \texttt{b} to be 5, we can have below 5 equivalence classes.
 
 \begin{table}[h!]
 \centering
@@ -70,14 +70,14 @@ Considering an actual value for \texttt{b} to be 5, we can have below 5 equivale
 
 And from the table it is clear that for modulo 5, the numbers 7 and 12 behaves exactly same. And mathematically they as denoted as congruent to each other for modulo 5.
 Symbolically it can be represented as, \texttt{7} $\equiv$ \texttt{12} (mod \texttt{5}).
-So when, the modulo \texttt{b} give same \texttt{r} for a set of different numbers, finding and studying the equivalance for \texttt{r} was enticing.
+So when, the modulo \texttt{b} give same \texttt{r} for a set of different numbers, finding and studying the equivalence for \texttt{r} was enticing.
 
-Yes, a closer look at the way modulus operator works gives the answer, there exist another  number \texttt{s}, \texttt{s} $\neq$ \texttt{r}, that can be substituted in the algorithm involving further recusrsive modulus, without affecting the final result. And the number \textit{s} can be expressed as below
+Yes, a closer look at the way modulus operator works gives the answer, there exist another  number \texttt{s}, \texttt{s} $\neq$ \texttt{r}, that can be substituted in the algorithm involving further recursive modulus, without affecting the final result. And the number \textit{s} can be expressed as below
 \newline \vspace{0mm} \hspace{4cm} \textit{s} = $ (\ $ $\lceil$ a/b $\rceil$  $\times $ b $\ )$ - b
-\newline \textit{r} can be expressed simmilary as below
+\newline \textit{r} can be expressed similarly as below
 \newline \vspace{0mm} \hspace{4cm}\textit{r} = b - $ (\ $ $\lfloor$ a/b $\rfloor$  $\times $ b $\ )$
 \newline So we have \{ \textit{r}, \textit{s} \} $\in$ \textbf{G}, \textit{r}, \textit{s} $<$ \textit{b}, which can be used as one of the input to the Algorithm. 
-\newline We can otherwise say, the elements of \textbf{G} exhibits \textit{isomorphic }  behaviour.
+\newline We can otherwise say, the elements of \textbf{G} exhibits \textit{isomorphic }  behavior.
 
 Let's look at a more detailed algorithm, iterative in nature and presented in a book by M. Dietzfelbinger, and is based on the previously mentioned Euclid's algorithm which is recursive in nature but the principle remains same.
 \newline
@@ -105,7 +105,7 @@ Let's look at a more detailed algorithm, iterative in nature and presented in a 
 \RETURN a
 \end {algorithmic}
 
-Let's consider the intitial values for the variables \texttt{a} and \texttt{b} populated in the line 3 and 5 from the input values to the algorithm $n$, and $m$ be (a\textsubscript{0}, b\textsubscript{0}). In the line number 8 it can be noticed that; for each iteration in the loop we have new sequence of (a, b) and for the i\textsuperscript{th} iteration we can formulate a\textsubscript{i} = b\textsubscript{i-1}, b\textsubscript{i} = a\textsubscript{i-1} mod b\textsubscript{i-1}, for $1 \geq i \geq t$, and b\textsubscript{t} = 0
+Let's consider the initial values for the variables \texttt{a} and \texttt{b} populated in the line 3 and 5 from the input values to the algorithm $n$, and $m$ be (a\textsubscript{0}, b\textsubscript{0}). In the line number 8 it can be noticed that; for each iteration in the loop we have new sequence of (a, b) and for the i\textsuperscript{th} iteration we can formulate a\textsubscript{i} = b\textsubscript{i-1}, b\textsubscript{i} = a\textsubscript{i-1} mod b\textsubscript{i-1}, for $1 \geq i \geq t$, and b\textsubscript{t} = 0
 
 \begin{table}[h!]
 \centering
@@ -130,7 +130,7 @@ For \textbf{t} = 7, b\textsubscript{t} = 0 and the algorithm exits with the retu
 46 as the gcd for (12742, 10534).
 
 Now it is the time to see the results when the claim made in this paper is being applied 
-to the alorithm. According to the claim, instead of the remainder of the division, the seek value (\texttt{s}) that could make the dividend a multiple of divisor, which is same as difference between divisor and remainder, can be used in the algorithm without affecting the result. So we can modify line no. 8 of the Algorithm 2 by using a modified implementaion of \texttt{mod} and we call it \texttt{mod'} and can be expressed as below. Let's name this modified algorithm as algorithm no: 3 .  \linebreak
+to the algorithm. According to the claim, instead of the remainder of the division, the seek value (\texttt{s}) that could make the dividend a multiple of divisor, which is same as difference between divisor and remainder, can be used in the algorithm without affecting the result. So we can modify line no. 8 of the Algorithm 2 by using a modified implementation of \texttt{mod} and we call it \texttt{mod'} and can be expressed as below. Let's name this modified algorithm as algorithm no: 3 .  \linebreak
 \textit{a} mod' \textit{b} = \textit{s}, where  \textit{s} = \textit{b - r}, \textit{r} = \textit{a} mod \textit{b}
 
 The values obtained during the intermediate steps captured for the algorithm no: 3 in following table is presented for the reference.
@@ -139,7 +139,7 @@ The values obtained during the intermediate steps captured for the algorithm no:
 \centering
 	\begin{tabular}{c | c | c | c}
 		\hline
-		$i$ & $a\textsubscript{i}$ & $b\textsubscript{i} using s$ & $coresponding r$\\ [0.5ex] 
+		$i$ & $a\textsubscript{i}$ & $b\textsubscript{i} using s$ & $corresponding r$\\ [0.5ex] 
 		\hline
 		0 & 12742 & 10534 & na  \\ 
 		1 & 10534 & 8326  & 2208\\  
@@ -162,7 +162,7 @@ this combination of numbers we have received 6 times \texttt{s} > \texttt{r} and
 
 \section{Alternative Approach using 's'}
 Now the question raises, what is the significance of this \texttt{s} over \texttt{r}.
-If we analyse the Euclidian algorithm for finding greatest common divisor, it is quite evident that, the arguments are getting reduced and one of them reduced till 0 when finally the output of the algorithm is obtained. So it is quite natural that if \texttt{s} can be substituted  for \texttt{r} then finding the smallest of them at each recursive call and using it for the subsequent recursion can help the recursion bringing the operand closer to 0 more quickly. The modified algorithm can be presented below.
+If we analyse the Euclidean algorithm for finding greatest common divisor, it is quite evident that, the arguments are getting reduced and one of them reduced till 0 when finally the output of the algorithm is obtained. So it is quite natural that if \texttt{s} can be substituted  for \texttt{r} then finding the smallest of them at each recursive call and using it for the subsequent recursion can help the recursion bringing the operand closer to 0 more quickly. The modified algorithm can be presented below.
 \newline \textbf{Algorithm 4:}
 \begin{algorithmic}[1]
 \STATE a, b: integer
@@ -201,12 +201,12 @@ The values obtained during the intermediate steps captured for the algorithm no:
 \end{table}
 
 \section{Conclusion}
-From the table 4 contents it is clear that by using the \texttt{min(r,s)} is advantageous and bring down the number of recursion. And also it is proved that we have a substitute for \texttt{r} in the context of modulos arithmatic and which can be used within the intermediate steps of the algorithm to find gcd of two numbers. The order of optimisation is still under investigation and could be significant when we integers with very very long digits may be in the order of thousands!
+From the table 4 contents it is clear that by using the \texttt{min(r,s)} is advantageous and bring down the number of recursion. And also it is proved that we have a substitute for \texttt{r} in the context of modulus arithmetic and which can be used within the intermediate steps of the algorithm to find gcd of two numbers. The order of optimization is still under investigation and could be significant when we integers with very very long digits may be in the order of thousands!
 
 
 \begin{thebibliography}{6}
 
-\bibitem{latex}S. Dasgupta, C. Papadimitriou and U. Vazirani, \textsl{Algorithims
+\bibitem{latex}S. Dasgupta, C. Papadimitriou and U. Vazirani, \textsl{Algorithms
 },
 first edition, Mc Graw Hill(2008).
 \bibitem{latex}Martin Dietzfelbinger \textsl{Primality Testing in Polynomial Time
