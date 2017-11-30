@@ -44,10 +44,10 @@ natural numbers. The definition for the Euclidean Algorithm can be seen as below
 For two integers \texttt{a} and \texttt{b}, the working of modulus operator can be explained as follows.
 For \texttt{a} > \texttt{b}, \texttt{a} mod \texttt{b} = \texttt{r},  such that \texttt{b}>\texttt{r} and  \texttt{a} = \texttt{q} * \texttt{b} + \texttt{r}, \texttt{q} is the quotient of the division of \texttt{a} and \texttt{b} and the \texttt{r} is the remainder of the said division. When the remainder is \texttt{0}, then \texttt{a} is said to be divisible by \texttt{b}.
 
-So from the mentioned algorithm it is quite evident that, the remainder (\texttt{•}{r}) of the modulus operation is being treated as one of the input of subsequent recursive function call, and also happens to be the \textbf{smallest} of the two parameters.
+So from the mentioned algorithm it is quite evident that, the remainder (\texttt{r}) of the modulus operation is being treated as one of the input of subsequent recursive function call, and also happens to be the \textbf{smallest} of the two parameters.
 
 \section{Purpose}
-The main purpose of this paper is to show whether this number \texttt{r} is unique for our \textit{gcd} algorithm purpose, or there exist another number that can also be substituted for this number?
+The main purpose of this paper is to show whether this number \texttt{r} is unique for our \textit{gcd} algorithm purpose, or there exists another number that can also be substituted for this number?
 
 There is a very interesting property exhibited by modular arithmetic.
 When we perform modular arithmetic such as \texttt{a} mod \texttt{b}, there exists
@@ -201,7 +201,7 @@ The values obtained during the intermediate steps captured for the algorithm no:
 \end{table}
 
 \section{Conclusion}
-From the table 4 contents it is clear that by using the \texttt{min(r,s)} is advantageous and bring down the number of recursion. And also it is proved that we have a substitute for \texttt{r} in the context of modulus arithmetic and which can be used within the intermediate steps of the algorithm to find gcd of two numbers. The order of optimization is still under investigation and could be significant when we integers with very very long digits may be in the order of thousands!
+From the table 4 contents it is clear that by using the \texttt{min(r,s)} is advantageous and bring down the number of recursion. And also it is proved that we have a substitute for \texttt{r} in the context of modulus arithmetic and which can be used within the intermediate steps of the algorithm to find gcd of two numbers. The order of optimization is still under investigation and could be significant when we integers with very very long digits may be in the order of thousands! Having 
 
 
 \begin{thebibliography}{6}
