@@ -99,14 +99,19 @@ public:
  */
 BigInteger powerModRecursive(BigInteger x, BigInteger y, const BigInteger& m) {
     // TODO
+    if (y == 0)
+        return 1;
+    if (y == 1)
+        return  x % m;
     // This naive implementation is just a placeholder so that the test program works properly.
     // It should be replaced by a more efficient implementation.
     BigInteger z = BigInteger(1);
-    while(y > 0) {
-        z = z * x % m;
-        y--;
-    }
-    return z;
+    z = (x % m * x % m) % m;
+    if (!y.isEven())
+        z = z * x;
+    y  = y / 2;
+
+    return powerModRecursive(z, y, m);
 }
 
 
@@ -359,4 +364,44 @@ void finalTest() {
     }
 
     file.close();
+}
+
+int main(int argc, char** argv) {
+    // Step 1
+    cout << "##### Step 1 ### testBuiltInDatatypes #####" << endl;
+    testBuiltInDatatypes();
+    cout << "### Step 1 done ###" << endl;
+    cin.get();
+
+    // Step 2
+    cout << "##### Step 2 ### testBigInteger #####" << endl;
+    testBigInteger();
+    cout << "### Step 2 done ###" << endl;
+    cin.get();
+
+    // Step 3
+    cout << "##### Step 3 ### testTestData #####" << endl;
+    testTestData();
+    cout << "### Step 3 done ###" << endl;
+    cin.get();
+
+    // Step 4
+    cout << "##### Step 4 ### testPowerModRecursive #####" << endl;
+    testPowerModRecursive();
+    cout << "### Step 4 done ###" << endl;
+    cin.get();
+
+    // Step 5
+    cout << "##### Step 5 ### testTimer #####" << endl;
+    testTimer();
+    cout << "### Step 5 done ###" << endl;
+    cin.get();
+
+    // Step 6
+    cout << "##### Step 6 ### finalTest #####" << endl;
+    finalTest();
+    cout << "### Step 6 done ###" << endl;
+    cin.get();
+
+    return 0;
 }
