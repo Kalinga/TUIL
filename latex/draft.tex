@@ -1,14 +1,81 @@
-\documentclass[12pt]{article}
-\usepackage[T1]{fontenc}
-\usepackage{hyperref}   % hypertext links, URLs
-\usepackage{algorithm}
-\usepackage{algorithmic}
-\usepackage{multicol}
-\usepackage[utf8]{inputenc}
+%\documentclass[12pt]{article}
+\documentclass[conference,compsoc]{IEEEtran}
+\IEEEoverridecommandlockouts
 
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}   % hypertext links, URLs
+
+% *** SPECIALIZED LIST PACKAGES ***
+%
+%\usepackage{algorithmic}
+% algorithmic.sty was written by Peter Williams and Rogerio Brito.
+% This package provides an algorithmic environment fo describing algorithms.
+% You can use the algorithmic environment in-text or within a figure
+% environment to provide for a floating algorithm. Do NOT use the algorithm
+% floating environment provided by algorithm.sty (by the same authors) or
+% algorithm2e.sty (by Christophe Fiorio) as the IEEE does not use dedicated
+% algorithm float types and packages that provide these will not provide
+% correct IEEE style captions. The latest version and documentation of
+% algorithmic.sty can be obtained at:
+% http://www.ctan.org/pkg/algorithms
+% Also of interest may be the (relatively newer and more customizable)
+% algorithmicx.sty package by Szasz Janos:
+% http://www.ctan.org/pkg/algorithmicx
+
+%\usepackage{algorithm}
+\usepackage{algorithmic}
+
+%\usepackage{multicol}
+
+
+% *** MATH PACKAGES ***
+%
+%\usepackage{amsmath}
+% A popular package from the American Mathematical Society that provides
+% many useful and powerful commands for dealing with mathematics.
+%
+% Note that the amsmath package sets \interdisplaylinepenalty to 10000
+% thus preventing page breaks from occurring within multiline equations. Use:
+%\interdisplaylinepenalty=2500
+% after loading amsmath to restore such page breaks as IEEEtran.cls normally
+% does. The latest version and documentation can be obtained at:
+% http://www.ctan.org/pkg/amsmath
 \usepackage{amsmath}
 \usepackage{amsfonts}
+\interdisplaylinepenalty=2500
 
+% *** ALIGNMENT PACKAGES ***
+%
+%\usepackage{array}
+% Frank Mittelbach's and David Carlisle's array.sty patches and improves
+% the standard LaTeX2e array and tabular environments to provide better
+% appearance and additional user controls. As the default LaTeX2e table
+% generation code is lacking to the point of almost being broken with
+% respect to the quality of the end results, all users are strongly
+% advised to use an enhanced (at the very least that provided by array.sty)
+% set of table tools. array.sty is already installed on most systems. The
+% latest version and documentation can be obtained at:
+% http://www.ctan.org/pkg/array
+
+
+% IEEEtran contains the IEEEeqnarray family of commands that can be used to
+% generate multiline equations as well as matrices, tables, etc., of high
+% quality.
+\usepackage{array}
+
+% *** CITATION PACKAGES ***
+%
+\ifCLASSOPTIONcompsoc
+  % IEEE Computer Society needs nocompress option
+  % requires cite.sty v4.0 or later (November 2003)
+  \usepackage[nocompress]{cite}
+\else
+  % normal IEEE
+  \usepackage{cite}
+\fi
+
+\hyphenation{op-tical net-works semi-conduc-tor}
 
 \setlength{\baselineskip}{16.0pt}    % 16 pt usual spacing between lines
 \setlength{\parskip}{3pt plus 2pt}
@@ -27,59 +94,63 @@
 \renewcommand{\Pr}{{\mathbf{Pr}}}
 \newcommand{\E}{{\mathbf{E}}}
 
+\newcommand{\var}[1]{\textit{#1}}
+
+\newcommand{\progvar}[1]{\texttt{#1}}
+
+\renewcommand{\mod}{\text{mod}}
+
 \renewcommand{\gcd}{\text{gcd}}
 
 \newcommand{\ceil}[1]{\lceil#1\rceil}
 
 \newcommand{\floor}[1]{\lfloor#1\rfloor}
 
+%--------------------------------------------ENV Setup-----------------------------
+
 \begin{document}
 %\begin{multicols}{1}
-\begin{center}
-{\large Variation of Euclidean Algorithm for finding gcd of two numbers} \\
-\copyright 2017 by Kalinga Bhusan Ray \\
-November 15, 2017 \\
-Technische Universität Ilmenau, Ilmenau, Germany \\
-\author{Kalinga Bhusan Ray}
-\end{center}
+%
+% paper title
+% Titles are generally capitalized except for words such as a, an, and, as,
+% at, but, by, for, in, nor, of, on, or, the, to and up, which are usually
+% not capitalized unless they are the first or last word of the title.
+% Linebreaks \\ can be used within to get better formatting as desired.
+% Do not put math or special symbols in the title.
+\title {Variation of Euclidean Algorithm for finding gcd of two numbers} 
 
-\section*{Acknowledgement}
-Dietzfelbinger, Martin (Professor, TU Ilemanu) for proofreading and valuable feedback
+% author names and affiliations
+% use a multiple column layout for up to three different
+% affiliations
+\author{\IEEEauthorblockN{Kalinga Bhusan Ray}
+\IEEEauthorblockA{Research in Computer System and Engineering\\
+Technische Universität Ilmenau\\
+Ilmenau, Germany\\
+Email: kalinga-bhusan.ray@tu-ilmenau.de}}
+
 %\end{multicols}
 
-\quad
+% make the title area
+\maketitle
 
-\begin{multicols}{2}
-\section{Abstract}
+\begin{abstract}
 Finding greatest common divisor(gcd) is very basic to the elementary mathematics.
-Mathematics of calculating gcd and it properties has been studied over the several thousand years. And it still fascinates today's mathematicians and computer scientisct 
-because of its application in modern cryptography which is essential to world wide web
-secure communication and other secure data transmission.
+Mathematics of calculating gcd and it properties has been studied over the several thousand years. And it still fascinates today's mathematicians and computer scientists 
+because of its application in modern cryptography which is essential to the world wide web's secure communication and other secure data transmission.
 I don't think the findings proposed in this paper is not noted in the past, however i have not seen it anywhere and not in the text books discussing Euclidean Algorithm for finding gcd. And this motivated me to document this finding. 
+\end{abstract}
 
-\section{Keywords}
-GCD Algorithm, greatest common divisor, Euclidean Algorithm for gcd, gcd
-
-% [t] indicates the top of the page
-% {table*} used for wide table
-\begin{table*}[t]
-\centering
-	\begin{tabular}{c c c c c c}
-		... & -5 & 0 & 5 & 10 & ... \\
-		... & -4 & 1 & 6 & 11 & ... \\
-		... & -3 & 2 & 7 & 12 & ... \\
-		... & -2 & 3 & 8 & 13 & ... \\
-		... & -1 & 4 & 9 & 14 & ...
-	\end{tabular}
-\caption{Table showing equivalence class for modulo 5 on integers}
-\label{table:1}
-\end{table*}
+% no keywords
+%GCD Algorithm, greatest common divisor, Euclidean Algorithm for gcd, gcd
 
 \section{Introduction}
 Greatest common divisor(gcd) of two integers $a$ and $b$ can be defined as: A common divisor of $a$ and $b$ is a greatest integer that divides both. The gcd is the unique	nonnegative $c$ such that $c$ is a common divisor, and if $d$ is a common divisor then $d$ divides $c$; ensuring $c$ is the highest among all such $d$. 
 Gcd for two numbers exhibits some interesting behavior and its worth noting them here.
-$\gcd(a,b)=\gcd(b,a)$ and $\gcd(-a,b)=\gcd(a,b)$ and $\gcd(a,0)=a$
-and $\gcd(a,b)=\gcd(a-ub,b)$, for arbitrary $u\in\Z$
+$\gcd(a,b)=\gcd(b,a)$, $\gcd(-a,b)=\gcd(a,b)$,  $\gcd(a,0)=a$ and
+
+\begin{equation} \label{eq:gcd_mul_difference}
+\gcd(a,b) = \gcd(a-ub,b), q\in\Z
+\end{equation}
 
 The methodology for finding that, was initially formulated by the famous Greek mathematician Euclid. This methodology for finding greatest common divisor for two natural numbers is otherwise known as Euclidean Algorithm for finding gcd of two 
 natural numbers. The definition for the Euclidean Algorithm can be seen as below.
@@ -88,23 +159,102 @@ natural numbers. The definition for the Euclidean Algorithm can be seen as below
 \newline 
 \newline An algorithm based on above definition can be found from text book [1] as follow.
 \newline \textbf{Algorithm 1:}
-\newline \textbf {Euclid's algorithm for finding the greatest common divisor of two numbers.}\newline \underline {function Euclid}(a, b)
-\newline Input: Two integers a and b with a $\geq$ b $\geq$ 0 
-\newline Output: gcd(a, b)
+\newline \textbf {Euclid's algorithm for finding the greatest common divisor of two numbers.}\newline \underline {function Euclid}(\progvar{a}, \progvar{b})
+\newline Input: Two integers \progvar{a} and \progvar{b} with \progvar{a} $\geq$ \progvar{b} $\geq$ 0 
+\newline Output: gcd((\progvar{a}, \progvar{b})
 \newline
-\newline if b=0: return a
-\newline return Euclid(b, a mod b)
+\newline if \progvar{b}=0: return \progvar{a}
+\newline return Euclid(\progvar{b}, \progvar{a} mod \progvar{b})
 \newline 
-\newline From the above compact algorithm, it can be noticed, the algorithm is based on recursive approach to solve the problem and usage of mathematical modulus operator(\textit {mod} in short).
-For two integers \texttt{a} and \texttt{b}, the working of modulus operator can be explained as follows.
-For \texttt{a} > \texttt{b}, \texttt{a} mod \texttt{b} = \texttt{r},  such that \texttt{b}>\texttt{r} and  \texttt{a} = \texttt{q} * \texttt{b} + \texttt{r}, \texttt{q} is the quotient of the division of \texttt{a} and \texttt{b} and the \texttt{r} is the remainder of the said division. When the remainder is \texttt{0}, then \texttt{a} is said to be divisible by \texttt{b}.
+\newline From the above compact algorithm, it can be noticed, the algorithm is based on recursive approach to solve the problem and usage of mathematical modulus operator(\mod in short).
+For two integers \var{a} and \var{b}, the working of modulus operator can be explained as follows.
+For \var{a} > \var{b}:
+\begin{equation} \label{eq:gcd_modulus_1}
+a \> \mod \> b = r,  b > r
+\end{equation}
+and
+\begin{equation} \label{eq:gcd_modulus_2}
+a = q * b + r
+\end{equation}
 
-So from the mentioned algorithm it is quite evident that, the remainder (\texttt{r}) of the modulus operation is being treated as one of the input of subsequent recursive function call, and also happens to be the \textbf{smallest} of the two parameters.
-The main purpose of this paper is to show whether this number \texttt{r} is unique for our gcd algorithm purpose, or there exists another number that can also be substituted for this number?
+\var{q} is the quotient of the division of \var{a} and \var{b} and the \var{r} is the remainder of the said division. When the remainder is 0, then \var{a} is said to be divisible by \var{b}.
+
+So from the mentioned algorithm it is quite evident that, the remainder (\var{r}) of the modulus operation is being treated as one of the input of subsequent recursive function call, and also happens to be the \textbf{smallest} of the two parameters.
+The main purpose of this paper is to show whether this number \var{r} is unique for our gcd algorithm purpose, or there exists another number that can also be substituted for this number?
 
 \section{Methodology}
+In the previous section, we have seen how modular arithimatic is crucial to the computation of $\gcd$. There is a very interesting property exhibited by modular arithmetic.
+When we perform modular arithmetic such as \var{a} mod \var{b}, there exists
+\var{b} number of equivalence classes, and all elements in one equivalence give same result on modulo operation with \var{b} and such equivalent element can be substituted for each other when performing modulo \var{b}.
+\newline
+Considering an actual value for \var{b} to be 5, we can have below 5 equivalence classes.
+
+% ---------------------------------TABBLE 1 -----------------------------------
 % [t] indicates the top of the page
-\begin{table*}[t]
+% {table*} used for wide table
+\begin{table}[!htbp]
+%% increase table row spacing, adjust to taste
+\renewcommand{\arraystretch}{1.3}
+\caption{Table showing equivalence class for modulo 5 on integers}
+\label{table:1}
+\centering
+	\begin{tabular}{c c c c c c}
+		... & -5 & 0 & 5 & 10 & ... \\
+		... & -4 & 1 & 6 & 11 & ... \\
+		... & -3 & 2 & 7 & 12 & ... \\
+		... & -2 & 3 & 8 & 13 & ... \\
+		... & -1 & 4 & 9 & 14 & ...
+	\end{tabular}
+\end{table}
+% ---------------------------------TABBLE 1 -----------------------------------
+
+And from the table number:1, it is clear that for modulo 5, the numbers 7 and 12 behaves exactly same. And mathematically they as denoted as congruent to each other for modulo 5.
+Symbolically it can be represented as, 7 $\equiv$ 12 (mod 5).
+So when, the modulo \var{b} give same \var{r} for a set of different numbers, finding and studying the equivalence for \var{r} was enticing.
+
+Yes, a closer look at the way modulus operator works gives the answer, there exist another  number \var{s}, \var{s} $\neq$ \var{r}, that can be substituted in the algorithm involving further recursive modulus, without affecting the final result. And the number \textit{s} can be expressed as below
+\newline $s = -(a-\ceil{a/b}*b) = \ceil{a/b}*b - a$
+\newline \textit{r} can be expressed similarly as below
+\newline $r = a - \floor{a/b}*b$
+\newline This paper intents to show and proof that \textit{r}, \textit{s} $\in \N$, \textit{r}, \textit{s} $<$ \textit{b}, and can replace each other when used as one of the input to the algorithm subsequently. Mathematically, $\gcd(a,b) =\gcd(b,r) = \gcd(b,s)$ to be proven.
+
+
+Let's look at a more detailed algorithm, iterative in nature and presented in a book by M. Dietzfelbinger, and is based on the previously mentioned Euclid's algorithm which is recursive in nature but the principle remains same.
+\newline
+\newline \textbf{Algorithm 2:}
+\newline \textbf{GCD Algorithm (Euclidean Algorithm)}
+\newline INPUT: Two integers \var{n}, \var{m}
+\newline METHOD:
+
+%\algsetup{
+%	indent=1em,	
+%	linenosize=\small,
+%	linenodelimiter=.
+%}
+
+\begin{algorithmic}[1]
+\STATE \progvar{a}, \progvar{b}: integer
+\IF{$|n| \geq |m|$}
+	\STATE $\progvar{a} \gets |n|; \progvar{b} \gets |m|;$
+\ELSE
+	\STATE $\progvar{a} \gets |m|; \progvar{b} \gets |n|;$
+\ENDIF
+\WHILE{$\progvar{b} > 0$ } 
+	\STATE $(\progvar{a}, \progvar{b}) \leftarrow (\progvar{b}, \progvar{a}  $ $\mod $ $\progvar{b});$
+\ENDWHILE
+\RETURN \progvar{a}
+\end {algorithmic}
+
+Let's consider the initial values for the variables \var{a} and \var{b} populated in the line 3 and 5 from the input values to the algorithm $n$, and $m$ be (a\textsubscript{0}, b\textsubscript{0}). In the line number 8 it can be noticed that; for each iteration in the loop we have new sequence of (a, b) and for the i\textsuperscript{th} iteration we can formulate a\textsubscript{i} = b\textsubscript{i-1}, b\textsubscript{i} = a\textsubscript{i-1} mod b\textsubscript{i-1}, for $1 \geq i \geq t$, and b\textsubscript{t} = 0
+
+For \textbf{t} = 7, b\textsubscript{t} = 0 and the algorithm exits with the return value 
+46 as the gcd for (12742, 10534). The captured output sequences are presented in the table 2 as below.
+% ---------------------------------TABBLE 2 -----------------------------------
+% [t] indicates the top of the page
+% {table*} used for wide table
+\begin{table}[!htbp]
+\caption{Table showing intermediate values while calculating gcd for (10534, 12742)}
+\label{table_org_book_example}
 \centering
 	\begin{tabular}{c | c | c}
 		\hline
@@ -119,52 +269,20 @@ The main purpose of this paper is to show whether this number \texttt{r} is uniq
 		6 & 138   & 46 \\
 		7 & 46    & 0
 	\end{tabular}
+\end{table}
+% ---------------------------------TABBLE 2 -----------------------------------
+
+Now it is the time to see the results when the claim made in this paper is being applied 
+to the algorithm. According to the claim, instead of the remainder of the division, the seek value (\var{s}) that could make the dividend a multiple of divisor, which is same as difference between divisor and remainder, can be used in the algorithm without affecting the result. So we can modify line no. 8 of the Algorithm 2 by using a modified implementation of \mod and we call it \mod' and can be expressed as below. Let's name this modified algorithm as algorithm no: 3 .  \linebreak
+\textit{a} mod' \textit{b} = \textit{s}, where  \textit{s} = \textit{b - r}, \textit{r} = \textit{a} mod \textit{b}
+
+The values obtained during the intermediate steps captured for the algorithm no: 3 in table:3 is presented below for the reference.
+% ---------------------------------TABBLE 3 -----------------------------------
+% [t] indicates the top of the page
+% {table*} used for wide table
+\begin{table}[!htbp]
 \caption{Table showing intermediate values while calculating gcd for (10534, 12742)}
-\label{table:2}
-\end{table*}
-In the previous section, we have seen how modular arithimatic is crucial to the computation of $\gcd$. There is a very interesting property exhibited by modular arithmetic.
-When we perform modular arithmetic such as \texttt{a} mod \texttt{b}, there exists
-\texttt{b} number of equivalence classes, and all elements in one equivalence give same result on modulo operation with \texttt{b} and such equivalent element can be substituted for each other when performing modulo \texttt{b}.
-\newline
-Considering an actual value for \texttt{b} to be 5, we can have below 5 equivalence classes.
-
-And from the table number:1, it is clear that for modulo 5, the numbers 7 and 12 behaves exactly same. And mathematically they as denoted as congruent to each other for modulo 5.
-Symbolically it can be represented as, \texttt{7} $\equiv$ \texttt{12} (mod \texttt{5}).
-So when, the modulo \texttt{b} give same \texttt{r} for a set of different numbers, finding and studying the equivalence for \texttt{r} was enticing.
-
-Yes, a closer look at the way modulus operator works gives the answer, there exist another  number \texttt{s}, \texttt{s} $\neq$ \texttt{r}, that can be substituted in the algorithm involving further recursive modulus, without affecting the final result. And the number \textit{s} can be expressed as below
-\newline $s = -(a-\ceil{a/b}*b) = \ceil{a/b}*b - a$
-\newline \textit{r} can be expressed similarly as below
-\newline $r = a - \floor{a/b}*b$
-\newline This paper intents to show and proof that \textit{r}, \textit{s} $\in \N$, \textit{r}, \textit{s} $<$ \textit{b}, and can replace each other when used as one of the input to the algorithm susequently. Mathematically, $\gcd(a,b) =\gcd(b,r) = \gcd(b,s)$ to be proven.
-
-Let's look at a more detailed algorithm, iterative in nature and presented in a book by M. Dietzfelbinger, and is based on the previously mentioned Euclid's algorithm which is recursive in nature but the principle remains same.
-\newline
-\newline \textbf{Algorithm 2:}
-\newline \textbf{GCD Algorithm (Euclidean Algorithm)}
-\newline INPUT: Two integers n, m
-\newline METHOD:
-
-%\algsetup{
-%	indent=1em,	
-%	linenosize=\small,
-%	linenodelimiter=.
-%}
-
-\begin{algorithmic}[1]
-\STATE a, b: integer
-\IF{$|n| \geq |m|$}
-	\STATE $a \gets |n|; b \gets |m|;$
-\ELSE
-	\STATE $b \gets |m|; a \gets |n|;$
-\ENDIF
-\WHILE{$b > 0$ } 
-	\STATE $(a, b) \leftarrow (b, a  $ $mod $ $b);$
-\ENDWHILE
-\RETURN a
-\end {algorithmic}
-
-\begin{table*}[t]
+\label{table:3}
 \centering
 	\begin{tabular}{c | c | c | c}
 		\hline
@@ -181,16 +299,41 @@ Let's look at a more detailed algorithm, iterative in nature and presented in a 
 		8 & 184    & 46   & 138\\
 		9 & 46     & 0    & na
 	\end{tabular}
-\caption{Table showing intermediate values while calculating gcd for (10534, 12742)}
-\label{table:3}
-\end{table*}
+\end{table}
+% ---------------------------------TABBLE 3 -----------------------------------
 
-Let's consider the initial values for the variables \texttt{a} and \texttt{b} populated in the line 3 and 5 from the input values to the algorithm $n$, and $m$ be (a\textsubscript{0}, b\textsubscript{0}). In the line number 8 it can be noticed that; for each iteration in the loop we have new sequence of (a, b) and for the i\textsuperscript{th} iteration we can formulate a\textsubscript{i} = b\textsubscript{i-1}, b\textsubscript{i} = a\textsubscript{i-1} mod b\textsubscript{i-1}, for $1 \geq i \geq t$, and b\textsubscript{t} = 0
+If we compare the contents of table 2 and 3, we could see some common numbers and some of them differs. One could also observe that in the table 3 we have two more entries, that's because the algorithm takes two more recursion to complete. This is because for 
+this combination of numbers we have received 6 times \var{s} > \var{r} and 2 times 
+\var{s} < \var{r}. But for other combination of numbers, the scenario could be different.
 
-For \textbf{t} = 7, b\textsubscript{t} = 0 and the algorithm exits with the return value 
-46 as the gcd for (12742, 10534).
+\textbf{Alternative Approach using 's'}
+Now the question raises, what is the significance of this \var{s} over \var{r}.
+If we analyse the Euclidean algorithm for finding greatest common divisor, it is quite evident that, the arguments are getting reduced and one of them reduced till 0 when finally the output of the algorithm is obtained. So it is quite natural that if \var{s} can be substituted  for \var{r} then finding the smallest of them at each recursive call and using it for the subsequent recursion can help the recursion bringing the operand closer to 0 more quickly. The modified algorithm can be presented below.
+\newline \textbf{Algorithm 4:}
+\begin{algorithmic}[1]
+\STATE \progvar{a}, \progvar{b}: integer
+\IF{$|n| \geq |m|$}
+	\STATE $\progvar{a} \gets |n|; \progvar{b} \gets |m|;$
+\ELSE
+	\STATE $\progvar{a} \gets |m|; \progvar{b} \gets |n|;$
+\ENDIF
+\WHILE{$\progvar{b} > 0$ } 
+	\STATE $(\progvar{a}, \progvar{b}) \leftarrow (\progvar{b}, \progvar{a}  $ $mod'' $ $\progvar{b});$
+\ENDWHILE
+\RETURN \progvar{a}
+\end {algorithmic}
+
+So it can be noted from the above that there is apparent no change from the previously given algorithm except line no. 8. The modified algorithm uses $mod'$ instead of \mod for the modulus operation. This $mod''$ can be expressed as below.
+If \textit{r} = \textit{a} mod \textit{b}, \textit{s} = \textit{b - r};
+\textit{a} $mod''$ \textit{b} = min(r, s), where \textit{min} is the function returns the least of the arguments.
+
+The values obtained during the intermediate steps captured for the algorithm no: 4 in following table is presented for the reference.
 % ---------------------------------TABBLE 4 -----------------------------------
-\begin{table*}[t]
+% [t] indicates the top of the page
+% {table*} used for wide table
+\begin{table}[!htbp]
+\caption{Table showing intermediate values while calculating gcd for (10534, 12742)}
+\label{table:4}
 \centering
 	\begin{tabular}{c | c | c | c| c}
 	\hline
@@ -203,46 +346,22 @@ For \textbf{t} = 7, b\textsubscript{t} = 0 and the algorithm exits with the retu
 		4 & 184   & 46    & 138  & 46\\
 		5 & 46    & 0     & na   & na
 	\end{tabular}
-\caption{Table showing intermediate values while calculating gcd for (10534, 12742)}
-\label{table:4}
-\end{table*}
+\end{table}
 % ---------------------------------TABBLE 4 -----------------------------------
 
-Now it is the time to see the results when the claim made in this paper is being applied 
-to the algorithm. According to the claim, instead of the remainder of the division, the seek value (\texttt{s}) that could make the dividend a multiple of divisor, which is same as difference between divisor and remainder, can be used in the algorithm without affecting the result. So we can modify line no. 8 of the Algorithm 2 by using a modified implementation of \texttt{mod} and we call it \texttt{mod'} and can be expressed as below. Let's name this modified algorithm as algorithm no: 3 .  \linebreak
-\textit{a} mod' \textit{b} = \textit{s}, where  \textit{s} = \textit{b - r}, \textit{r} = \textit{a} mod \textit{b}
-
-The values obtained during the intermediate steps captured for the algorithm no: 3 in table:3 is presented for the reference.
-
-If we compare the contents of table 2 and 3, we could see some common numbers and some of them differs. One could also observe that in the table 3 we have two more entries, that's because the algorithm takes two more recursion to complete. This is because for 
-this combination of numbers we have received 6 times \texttt{s} > \texttt{r} and 2 times 
-\texttt{s} < \texttt{r}. But for other combination of numbers, the scenario could be different.
-
-\textbf{Alternative Approach using 's'}
-Now the question raises, what is the significance of this \texttt{s} over \texttt{r}.
-If we analyse the Euclidean algorithm for finding greatest common divisor, it is quite evident that, the arguments are getting reduced and one of them reduced till 0 when finally the output of the algorithm is obtained. So it is quite natural that if \texttt{s} can be substituted  for \texttt{r} then finding the smallest of them at each recursive call and using it for the subsequent recursion can help the recursion bringing the operand closer to 0 more quickly. The modified algorithm can be presented below.
-\newline \textbf{Algorithm 4:}
-\begin{algorithmic}[1]
-\STATE a, b: integer
-\IF{$|n| \geq |m|$}
-	\STATE $a \gets |n|; b \gets |m|;$
-\ELSE
-	\STATE $b \gets |m|; a \gets |n|;$
-\ENDIF
-\WHILE{$b > 0$ } 
-	\STATE $(a, b) \leftarrow (b, a  $ $mod'' $ $b);$
-\ENDWHILE
-\RETURN a
-\end {algorithmic}
-
-So it can be noted from the above that there is apparent no change from the previously given algorithm except line no. 8. The modified algorithm uses $mod'$ instead of \texttt{mod} for the modulus operation. This $mod''$ can be expressed as below.
-If \textit{r} = \textit{a} mod \textit{b}, \textit{s} = \textit{b - r};
-\textit{a} $mod''$ \textit{b} = min(r, s), where \textit{min} is the function returns the least of the arguments.
-
-The values obtained during the intermediate steps captured for the algorithm no: 3 in following table is presented for the reference.
-
 \section{Conclusion}
-From the table 4 contents it is clear that by using the \texttt{min(r,s)} is advantageous and bring down the number of recursion. And also it is proved that we have a substitute for \texttt{r} in the context of modulus arithmetic and which can be used within the intermediate steps of the algorithm to find gcd of two numbers. The order of optimization is still under investigation and could be significant when we integers with very very long digits may be in the order of thousands! Having discussed the advantage of \texttt{$mod''$}, it also should be noted that \texttt{$mod''$} is implemented with the help of existing \texttt{mod} operator and an additional subtraction. The running time of subtraction is linear however the running time of modular operation is quadratic in nature. So this additional subtraction can be well compensated by reduction in the number of intermediate steps in the recursion. There are also other highly optimised algorithm exists such as \texttt{Binary GCD}, \texttt{Lehmer's Algorithm} etc. for finding the gcd and this paper does not intent to provide a optimise algorithm for gcd.
+From the table 4 contents it is clear that by using the \var{min(r,s)} is advantageous and bring down the number of recursion. And also it is proved that we have a substitute for \var{r} in the context of modulus arithmetic and which can be used within the intermediate steps of the algorithm to find gcd of two numbers. The order of optimization is still under investigation and could be significant when we integers with very very long digits may be in the order of thousands! Having discussed the advantage of $mod''$, it also should be noted that $mod''$ is implemented with the help of existing \mod operator and an additional subtraction. The running time of subtraction is linear however the running time of modular operation is quadratic in nature. So this additional subtraction can be well compensated by reduction in the number of intermediate steps in the recursion. There are also other highly optimised algorithm exists such as \var{Binary GCD}, \var{Lehmer's Algorithm} etc. for finding the gcd and this paper does not intent to provide a optimise algorithm for gcd.
+
+% use section* for acknowledgment
+\ifCLASSOPTIONcompsoc
+  % The Computer Society usually uses the plural form
+  \section*{Acknowledgments}
+\else
+  % regular IEEE prefers the singular form
+  \section*{Acknowledgment}
+\fi
+The author would like to thank Professor Dr. Martin Dietzfelbinger, Department of Computer Science and Automation of Technische Universität Ilmenau for proofreading
+and valuable feedback.
 
 \begin{thebibliography}{6}
 
@@ -257,5 +376,5 @@ first edition, Springer(2004).
 
 \end{thebibliography}
 
-\end{multicols}
+%\end{multicols}
 \end{document}
