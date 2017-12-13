@@ -135,7 +135,7 @@ Email: kalinga-bhusan.ray@tu-ilmenau.de}}
 
 \begin{abstract}
 Finding greatest common divisor(gcd) is very basic to the elementary mathematics.
-Mathematics of calculating gcd and it properties has been studied over the several thousand years. And it still fascinates today's mathematicians and computer scientists 
+Mathematics of calculating gcd and its properties has been studied over the several thousand years. And it still fascinates today's mathematicians and computer scientists 
 because of its application in modern cryptography which is essential to the world wide web's secure communication and other secure data transmission.
 I don't think the findings proposed in this paper is not noted in the past, however i have not seen it anywhere and not in the text books discussing Euclidean Algorithm for finding gcd. And this motivated me to document this finding. 
 \end{abstract}
@@ -144,32 +144,49 @@ I don't think the findings proposed in this paper is not noted in the past, howe
 %GCD Algorithm, greatest common divisor, Euclidean Algorithm for gcd, gcd
 
 \section{Introduction}
-Greatest common divisor(gcd) of two integers $a$ and $b$ can be defined as: A common divisor of $a$ and $b$ is a greatest integer that divides both. The gcd is the unique	nonnegative $c$ such that $c$ is a common divisor, and if $d$ is a common divisor then $d$ divides $c$; ensuring $c$ is the highest among all such $d$. 
-Gcd for two numbers exhibits some interesting behavior and its worth noting them here.
+Greatest common divisor(gcd) of two integers $a$ and $b$ can be defined as: A common divisor of $a$ and $b$ is a greatest integer that divides both. The gcd is the unique	nonnegative number $c$ such that $c$ is a common divisor, and if $d$ is a common divisor then $d$ divides $c$; ensuring $c$ is the highest among all such $d$. 
+GCD of two numbers exhibits some interesting behavior and it is worth noting them here.
 $\gcd(a,b)=\gcd(b,a)$, $\gcd(-a,b)=\gcd(a,b)$,  $\gcd(a,0)=a$ and
 
-\begin{equation} \label{eq:gcd_mul_difference}
-\gcd(a,b) = \gcd(a-ub,b), q\in\Z
+\begin{equation} \label{eq:gcd_mul_difference} 
+\gcd(a,b) = \gcd(a-ub,b), u\in\Z
 \end{equation}
 
-The methodology for finding that, was initially formulated by the famous Greek mathematician Euclid. This methodology for finding greatest common divisor for two natural numbers is otherwise known as Euclidean Algorithm for finding gcd of two 
-natural numbers. The definition for the Euclidean Algorithm can be seen as below.
-\newline \newline \textbf {Euclid's Rule} \textit {If x and y are positive integers with x $\geq$ y,
- then} \break \vspace{0mm} \hspace{4cm} gcd(x, y) = gcd(x mod y, y).
+\begin{equation} \label{eq:gcd_mul_difference}  
+\gcd(a,b) = \gcd(a+ub,b), u\in\Z
+\end{equation}
+
+\begin{equation} \label{eq:gcd_mul_difference} 
+\gcd(a,b) = \gcd(a, b+ua), u\in\Z
+\end{equation}
+
+\begin{equation} \label{eq:gcd_mul_difference} 
+\gcd(a,b) = \gcd(a, b-ua), u\in\Z
+\end{equation}
+
+The methodology for finding this greatest common divisor, was initially formulated by the famous Greek mathematician Euclid. This methodology for finding greatest common divisor of two natural numbers is otherwise known as Euclidean Algorithm for finding gcd of two natural numbers. The definition of the Euclidean Algorithm can be seen as below.
+\newline \newline \textbf {Euclid's Rule} \textit {If x and y are positive integers with x $\geq$ y, then} \newline 
+\gcd(\var{x}, \var{y}) = \gcd(\var{x} $\mod $ \var{y}, \var{y}).
 \newline 
 \newline An algorithm based on above definition can be found from text book [1] as follow.
-\newline \textbf{Algorithm 1:}
-\newline \textbf {Euclid's algorithm for finding the greatest common divisor of two numbers.}\newline \underline {function Euclid}(\progvar{a}, \progvar{b})
-\newline Input: Two integers \progvar{a} and \progvar{b} with \progvar{a} $\geq$ \progvar{b} $\geq$ 0 
+%\linebreak
+\\~\\
+\textbf{Algorithm 1:}
+\newline
+\textbf {Euclid's algorithm for finding the greatest common divisor of two numbers.}\newline
+\underline {function Euclid}(\progvar{a}, \progvar{b})
+\newline 
+Input: Two integers \progvar{a} and \progvar{b} with \progvar{a} $\geq$ \progvar{b} $\geq$ 0 
 \newline Output: gcd((\progvar{a}, \progvar{b})
 \newline
 \newline if \progvar{b}=0: return \progvar{a}
 \newline return Euclid(\progvar{b}, \progvar{a} mod \progvar{b})
 \newline 
-\newline From the above compact algorithm, it can be noticed, the algorithm is based on recursive approach to solve the problem and usage of mathematical modulus operator(\mod in short).
+\newline From the above compact algorithm, it can be noticed, the algorithm is based on recursive approach to solve the problem and usage of mathematical modulus operator($\mod $ in short).
 For two integers \var{a} and \var{b}, the working of modulus operator can be explained as follows.
 For \var{a} > \var{b}:
 \begin{equation} \label{eq:gcd_modulus_1}
+%\> inserts space
 a \> \mod \> b = r,  b > r
 \end{equation}
 and
@@ -179,8 +196,18 @@ a = q * b + r
 
 \var{q} is the quotient of the division of \var{a} and \var{b} and the \var{r} is the remainder of the said division. When the remainder is 0, then \var{a} is said to be divisible by \var{b}.
 
-So from the mentioned algorithm it is quite evident that, the remainder (\var{r}) of the modulus operation is being treated as one of the input of subsequent recursive function call, and also happens to be the \textbf{smallest} of the two parameters.
-The main purpose of this paper is to show whether this number \var{r} is unique for our gcd algorithm purpose, or there exists another number that can also be substituted for this number?
+So from the mentioned algorithm it is quite evident that, the remainder (\var{r}), output of the modulus operation is being treated as one of the input for the subsequent recursive function call, and also happens to be the \textbf{smallest} of the two parameters.
+\begin{equation} \label{eq:gcd_modulus_1}
+\gcd(a \>,\> b) = \gcd(a \>, \> r)
+\end{equation}
+and
+\begin{equation*} \label{eq:gcd_modulus_2}
+ b > r
+\end{equation*}
+
+The one of the purpose of this paper is to show whether this number \var{r} is unique for our gcd algorithm purpose, or there exists another number that can also be substituted for this number?
+
+If we take a look at equation ~\ref{eq:gcd_modulus_1} and equation ~\ref{eq:gcd_mul_difference}, then it is apparent that \var {r} in  ~\ref{eq:gcd_modulus_1} is a form of \var{a-ub} in ~\ref{eq:gcd_mul_difference}, where $u\in\Z.$ From those equations, it is also evident that we can have infinitely many values for \var {a} and \var {r} for which there is no changes to their \gcd. However we are interested in such value of \var {r} which moves towards 0, such that the algorithm comes to an end and produces an output. The next section details about such a number; that is close to \var {r} and we could substitute it in place of \var {r}. Also some of advantage of the application of this finding is discussed in subsequent section.
 
 \section{Methodology}
 In the previous section, we have seen how modular arithimatic is crucial to the computation of $\gcd$. There is a very interesting property exhibited by modular arithmetic.
