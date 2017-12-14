@@ -100,6 +100,10 @@
 
 \renewcommand{\mod}{\text{mod}}
 
+\newcommand{\moddash}{\text{mod'}}
+
+\newcommand{\moddashdash}{\text{mod''}}
+
 \renewcommand{\gcd}{\text{gcd}}
 
 \newcommand{\ceil}[1]{\lceil#1\rceil}
@@ -246,7 +250,7 @@ Yes, a closer look at the way modulus operator works gives the answer, there exi
 \newline This paper intents to show and proof that \textit{r}, \textit{s} $\in \N$, \textit{r}, \textit{s} $<$ \textit{b}, and can replace each other when used as one of the input to the algorithm subsequently. Mathematically, $\gcd(a,b) =\gcd(b,r) = \gcd(b,s)$ to be proven.
 
 
-Let's look at a more detailed algorithm, iterative in nature and presented in a book by M. Dietzfelbinger, and is based on the previously mentioned Euclid's algorithm which is recursive in nature but the principle remains same.
+Let's look at a more detailed algorithm, iterative in nature and presented in a book [2] by M. Dietzfelbinger, and is based on the previously mentioned Euclid's algorithm which is recursive in nature but the principle remains same.
 \newline
 \newline \textbf{Algorithm 2:}
 \newline \textbf{GCD Algorithm (Euclidean Algorithm)}
@@ -275,7 +279,7 @@ Let's look at a more detailed algorithm, iterative in nature and presented in a 
 Let's consider the initial values for the variables \var{a} and \var{b} populated in the line 3 and 5 from the input values to the algorithm $n$, and $m$ be (a\textsubscript{0}, b\textsubscript{0}). In the line number 8 it can be noticed that; for each iteration in the loop we have new sequence of (a, b) and for the i\textsuperscript{th} iteration we can formulate a\textsubscript{i} = b\textsubscript{i-1}, b\textsubscript{i} = a\textsubscript{i-1} mod b\textsubscript{i-1}, for $1 \geq i \geq t$, and b\textsubscript{t} = 0
 
 For \textbf{t} = 7, b\textsubscript{t} = 0 and the algorithm exits with the return value 
-46 as the gcd for (12742, 10534). The captured output sequences are presented in the table 2 as below.
+46 as the gcd for (12742, 10534). The captured output sequences are presented in the table 2 (referred from book[2]) as below.
 % ---------------------------------TABBLE 2 -----------------------------------
 % [t] indicates the top of the page
 % {table*} used for wide table
@@ -300,8 +304,14 @@ For \textbf{t} = 7, b\textsubscript{t} = 0 and the algorithm exits with the retu
 % ---------------------------------TABBLE 2 -----------------------------------
 
 Now it is the time to see the results when the claim made in this paper is being applied 
-to the algorithm. According to the claim, instead of the remainder of the division, the seek value (\var{s}) that could make the dividend a multiple of divisor, which is same as difference between divisor and remainder, can be used in the algorithm without affecting the result. So we can modify line no. 8 of the Algorithm 2 by using a modified implementation of \mod and we call it \mod' and can be expressed as below. Let's name this modified algorithm as algorithm no: 3 .  \linebreak
-\textit{a} mod' \textit{b} = \textit{s}, where  \textit{s} = \textit{b - r}, \textit{r} = \textit{a} mod \textit{b}
+to the algorithm. According to the claim, instead of the remainder of the division, the seek value (\var{s}) that could make the dividend a multiple of divisor, which is same as difference between divisor and remainder, can be used in the algorithm without affecting the result. 
+For this variation, let's define a new operator slightly different from \mod, and we name this as \moddash(say \mod -dash).
+\begin{equation} \label{eq:gcd_modulus_1_1}
+\var{a} \> \moddash \> \var{b} = \var{s}, \>  {s} = \var{b} - \var{r}, \var{r} = \var{a} \> \mod \> \var{b}
+\end{equation}
+  
+So we can modify line no. 8 of the Algorithm 2 by using \moddash. Let's name this modified algorithm as algorithm no: 3 .  \linebreak
+
 
 The values obtained during the intermediate steps captured for the algorithm no: 3 in table:3 is presented below for the reference.
 % ---------------------------------TABBLE 3 -----------------------------------
@@ -335,7 +345,18 @@ this combination of numbers we have received 6 times \var{s} > \var{r} and 2 tim
 
 \textbf{Alternative Approach using 's'}
 Now the question raises, what is the significance of this \var{s} over \var{r}.
-If we analyse the Euclidean algorithm for finding greatest common divisor, it is quite evident that, the arguments are getting reduced and one of them reduced till 0 when finally the output of the algorithm is obtained. So it is quite natural that if \var{s} can be substituted  for \var{r} then finding the smallest of them at each recursive call and using it for the subsequent recursion can help the recursion bringing the operand closer to 0 more quickly. The modified algorithm can be presented below.
+If we analyse the Euclidean algorithm for finding greatest common divisor, it is quite evident that, the arguments are getting reduced and one of them reduced till 0 when finally the output of the algorithm is obtained. So it is quite natural that if \var{s} can be substituted  for \var{r} then finding the smallest of them at each recursive call and using it for the subsequent recursion can help the recursion bringing the operand closer to 0 more quickly.
+
+Let's modify the algorithm, with a small variation with a slightly modified representaion of \mod and \moddash; let's define a new operator as \moddashdash(say \mod -dash-dash).
+
+\begin{equation} \label{eq:gcd_modulus_1_2}
+\var{a} \> \moddashdash  \> \var{b} = \text{min} \var(r, s);
+\var{r} = \var{a} \> \mod \> \var{b}; \> \var{s} = \var{b - r}
+\end{equation}
+
+where \textit{min} is the function returns the least of the arguments.
+
+The modified algorithm can be presented below.
 \newline \textbf{Algorithm 4:}
 \begin{algorithmic}[1]
 \STATE \progvar{a}, \progvar{b}: integer
@@ -351,8 +372,6 @@ If we analyse the Euclidean algorithm for finding greatest common divisor, it is
 \end {algorithmic}
 
 So it can be noted from the above that there is apparent no change from the previously given algorithm except line no. 8. The modified algorithm uses $mod'$ instead of \mod for the modulus operation. This $mod''$ can be expressed as below.
-If \textit{r} = \textit{a} mod \textit{b}, \textit{s} = \textit{b - r};
-\textit{a} $mod''$ \textit{b} = min(r, s), where \textit{min} is the function returns the least of the arguments.
 
 The values obtained during the intermediate steps captured for the algorithm no: 4 in following table is presented for the reference.
 % ---------------------------------TABBLE 4 -----------------------------------
