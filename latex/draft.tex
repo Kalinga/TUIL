@@ -1,5 +1,5 @@
 %\documentclass[12pt]{article}
-\documentclass[conference,compsoc]{IEEEtran}
+\documentclass[conference]{IEEEtran}
 \IEEEoverridecommandlockouts
 
 \usepackage[T1]{fontenc}
@@ -206,17 +206,17 @@ So from the mentioned algorithm it is quite evident that, the remainder (\var{r}
 \end{equation}
 and
 \begin{equation*} \label{eq:gcd_modulus_2}
- b > r
+ b \geq r
 \end{equation*}
 
 The one of the purpose of this paper is to show whether this number \var{r} is unique for our gcd algorithm purpose, or there exists another number that can also be substituted for this number?
 
-If we take a look at equation ~\ref{eq:gcd_modulus_1} and equation ~\ref{eq:gcd_mul_difference}, then it is apparent that \var {r} in  ~\ref{eq:gcd_modulus_1} is a form of \var{a-ub} in ~\ref{eq:gcd_mul_difference}, where $u\in\Z.$ From those equations, it is also evident that we can have infinitely many values for \var {a} and \var {r} for which there is no changes to their \gcd. However we are interested in such value of \var {r} which moves towards 0, such that the algorithm comes to an end and produces an output. The next section details about such a number; that is close to \var {r} and we could substitute it in place of \var {r}. Also some of advantage of the application of this finding is discussed in subsequent section.
+If we take a look at equation ~\ref{eq:gcd_modulus_1} and equation ~\ref{eq:gcd_mul_difference}, then it is apparent that \var {r} in  ~\ref{eq:gcd_modulus_1} is a form of \var{a-ub} in ~\ref{eq:gcd_mul_difference}, where $u\in\Z.$ From those equations, it is evident that we can have infinitely many values for \var {a} and \var {r} for which there is no changes to their \gcd. However we are interested in such value of \var {r} which moves towards 0, such that the algorithm comes to an end and produces an output. The next section details about such a number; that is close to \var {r} and we could substitute it in place of \var {r}. Also some of advantage of the application of this finding is discussed in subsequent section.
 
 \section{Methodology}
-In the previous section, we have seen how modular arithimatic is crucial to the computation of $\gcd$. There is a very interesting property exhibited by modular arithmetic.
+In the previous section, we have seen how modular arithmetic is crucial to the computation of $\gcd$. There is a very interesting property exhibited by modular arithmetic.
 When we perform modular arithmetic such as \var{a} mod \var{b}, there exists
-\var{b} number of equivalence classes, and all elements in one equivalence give same result on modulo operation with \var{b} and such equivalent element can be substituted for each other when performing modulo \var{b}.
+\var{b} number of equivalence classes, and all elements in one equivalence class give same result on modulo operation with \var{b} and such equivalent element can be substituted for each other when performing modulo \var{b}.
 \newline
 Considering an actual value for \var{b} to be 5, we can have below 5 equivalence classes.
 
@@ -345,9 +345,9 @@ this combination of numbers we have received 6 times \var{s} > \var{r} and 2 tim
 
 \textbf{Alternative Approach using 's'}
 Now the question raises, what is the significance of this \var{s} over \var{r}.
-If we analyse the Euclidean algorithm for finding greatest common divisor, it is quite evident that, the arguments are getting reduced and one of them reduced till 0 when finally the output of the algorithm is obtained. So it is quite natural that if \var{s} can be substituted  for \var{r} then finding the smallest of them at each recursive call and using it for the subsequent recursion can help the recursion bringing the operand closer to 0 more quickly.
+If we analyze the Euclidean algorithm for finding greatest common divisor, it is quite evident that, the arguments are getting reduced and one of them reduced till 0 when finally the output of the algorithm is obtained. So it is quite natural that if \var{s} can be substituted  for \var{r} then finding the smallest of them at each recursive call and using it for the subsequent recursion can help the recursion bringing the operand closer to 0 more quickly.
 
-Let's modify the algorithm, with a small variation with a slightly modified representaion of \mod and \moddash; let's define a new operator as \moddashdash  (say \mod -dash-dash).
+Let's modify the algorithm, with a small variation with a slightly modified representation of \mod $\>$ and \moddash; let's define a new operator as \moddashdash  (say \mod -dash-dash).
 
 \begin{equation} \label{eq:gcd_modulus_1_2}
 \var{a} \> \moddashdash  \> \var{b} = \text{min} \var(r, s);
@@ -371,7 +371,7 @@ The modified algorithm can be presented below.
 \RETURN \progvar{a}
 \end {algorithmic}
 
-So it can be noted from the above algorithm that, there is apparent no change from the previously given algorithm except line no. 8. The modified algorithm uses \moddashdash instead of \mod for the modulus operation. 
+So it can be noted from the above algorithm that, there is apparent no change from the previously given algorithm except line no. 8. The modified algorithm uses \moddashdash $\>$ instead of \mod $\>$ for the modulus operation. 
 
 The values obtained during the intermediate steps captured for the algorithm no: 4 in following table is presented for the reference.
 % ---------------------------------TABBLE 4 -----------------------------------
@@ -393,10 +393,44 @@ The values obtained during the intermediate steps captured for the algorithm no:
 		5 & 46    & 0     & na   & na
 	\end{tabular}
 \end{table}
-% ---------------------------------TABBLE 4 -----------------------------------
+
+\textbf{Running Time:}
+For calculating the running time of the algorithm no:4; we shall focus on line numbers 7-9 as 
+other statements in the algorithm take constant running time. Now let's analyze the line number 8.\linebreak
+For \var{a} > \var{b}, $k\in\N$, we could proof that \var{a} \moddashdash $\>$ \var{b} < \var{a/4}.
+%\begin(allign)
+\begin{equation*} 
+\var{a} = \var{k.}\var{b}, \var{a} \> \moddashdash \> \var{b}  = 0
+\end{equation*}
+\begin{equation*} 
+\var{a} = \var{k.}\var{b} + 1, \var{a} \> \moddashdash \> \var{b}  = 1
+\end{equation*} 
+\begin{equation*}
+\var{a} = \var{k.}\var{b} + \var(b/2), \var{a} \>  \moddashdash \>  \var{b}  = \var(b/2)
+\end{equation*} 
+\begin{equation*}
+\var{a} = \var{k.}\var{b} + \var(b/2) + 1, \var{a} \>  \moddashdash \>  \var{b}  = \var(b/2) -1
+\end{equation*} 
+\begin{equation*}
+.....
+\end{equation*} 
+\begin{equation*}
+\var{a} = \var{k.}\var{b} + (b - 1), \var{a} \>  \moddashdash \>  \var{b}  = 1
+\end{equation*} 
+\begin{equation*}
+\var{a} = \var{k.}\var{b} + b, \var{a} \>  \moddashdash \>  \var{b}  = 0
+\end{equation*} 
+%\end(allign)
+
+From the above sequence it is clear that the value for \var{a} \moddashdash \var{b} can maximum increases till \var{(b/2)} and then it decreases. For \var{a} > \var{b}, we can either have \var{b} <
+\var{a/2} or \var{b} $\geq$ \var{a/2} . Now let's consider \var{b} < \var{a/2}, then \var{a} \moddashdash \var{b} $\leq$ \var{b/2} < \var{a/4}.
+Consider \var{b} $\geq$ \var{a/2}, then \var{a} \moddashdash \var{b} $\leq$ \var{b/2} < \var{a/4}.
+So for each each two consecutive rounds the value of each input is getting one-fourth at least.
+So for the smallest integer \var{b} getting reduced to 0; so the algorithm at most shall take 1 + $\log_4(b)$ number of iteration.
+%--------------------------TABBLE 4 -----------------------------------
 
 \section{Conclusion}
-From the table 4 contents it is clear that by using the \var{min(r,s)} is advantageous and it brings down the number of recursions. And also it is proved that we have a substitute for \var{r} in the context of modulus arithmetic and which can be used within the intermediate steps of the algorithm to find gcd of two numbers. The order of optimization is still under investigation and could be significant when we integers with very very long digits may be in the order of thousands! Having discussed the advantage of \moddashdash, it also should be noted that \moddashdash is implemented with the help of existing \mod operator and an additional subtraction. The running time of subtraction is linear however the running time of modular operation is quadratic in nature. So this additional subtraction can be well compensated by reduction in the number of intermediate steps in the recursion. There are also other highly optimised algorithm exists such as \var{Binary GCD}, \var{Lehmer's Algorithm} etc. for finding the gcd and this paper does not intent to provide a optimise algorithm for gcd.
+From the table 4 contents it is clear that by using the \var{min(r,s)} is advantageous and it brings down the number of recursions. And also we have seen that, we have a substitute for \var{r} in the context of modulus arithmetic and that can be used within the intermediate steps of the algorithm to find gcd of two numbers. The running time of the loop evaluated to be $\log_4(b)$ number of iteration. The order of optimization is still under investigation and could be significant when we integers with very very long digits may be in the order of thousands! Having discussed the advantage of \moddashdash, it also should be noted that \moddashdash $\>$ is implemented with the help of existing \mod $\>$ operator and an additional subtraction. The running time of subtraction is linear however the running time of modular operation is quadratic in nature. So this additional subtraction can be well compensated by reduction in the number of intermediate steps in the recursion. There are also other highly optimized algorithm exists such as \var{Binary GCD}, \var{Lehmer's Algorithm} etc. for finding the gcd and this paper does not intent to provide a optimize algorithm for gcd. But the finding discussed in the paper can be clubbed together with other algorithm to make it more efficient.
 
 % use section* for acknowledgment
 \ifCLASSOPTIONcompsoc
@@ -406,8 +440,7 @@ From the table 4 contents it is clear that by using the \var{min(r,s)} is advant
   % regular IEEE prefers the singular form
   \section*{Acknowledgment}
 \fi
-The author would like to thank Professor Dr. Martin Dietzfelbinger, Department of Computer Science and Automation of Technische Universität Ilmenau for proofreading
-and valuable feedback.
+The author would like to thank Professor Dr. Martin Dietzfelbinger, Department of Computer Science and Automation of Technische Universität Ilmenau for proofreading and providing his valuable feedback.
 
 \begin{thebibliography}{6}
 
