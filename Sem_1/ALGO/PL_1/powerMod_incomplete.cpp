@@ -9,7 +9,7 @@
 #include <iomanip> // setw()
 #include <climits> // ..._MAX
 
-#include "BigInteger.h"
+#include "../BigInteger.h"
 
 using namespace std;
 
