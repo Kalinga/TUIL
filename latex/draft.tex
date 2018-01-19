@@ -172,7 +172,7 @@ The methodology for finding this greatest common divisor, was initially formulat
 \newline \newline \textbf {Euclid's Rule} \textit {If x and y are positive integers with x $\geq$ y, then} \newline 
 \gcd(\var{x}, \var{y}) = \gcd(\var{x} $\mod $ \var{y}, \var{y}).
 \newline 
-\newline An algorithm based on above definition can be found from text book [1] as follow.
+\newline An algorithm based on the above definition can be found from text book [1] as follow.
 %\linebreak
 \\~\\
 \textbf{Algorithm 1:}
@@ -226,7 +226,7 @@ Considering an actual value for \var{b} to be 5, we can have below 5 equivalence
 \begin{table}[!htbp]
 %% increase table row spacing, adjust to taste
 \renewcommand{\arraystretch}{1.3}
-\caption{Table showing equivalence class for modulo 5 on integers}
+\caption{Table showing equivalence classes of modulo 5 on integers}
 \label{table:1}
 \centering
 	\begin{tabular}{c c c c c c}
@@ -239,9 +239,9 @@ Considering an actual value for \var{b} to be 5, we can have below 5 equivalence
 \end{table}
 % ---------------------------------TABBLE 1 -----------------------------------
 
-And from the table number:1, it is clear that for modulo 5, the numbers 7 and 12 behaves exactly same. And mathematically they as denoted as congruent to each other for modulo 5.
+And from the table number:1, it is clear that for modulo 5, the numbers 7 and 12 behave exactly same. And mathematically they as denoted as congruent to each other for modulo 5.
 Symbolically it can be represented as, 7 $\equiv$ 12 (mod 5).
-So when, the modulo \var{b} give same \var{r} for a set of different numbers, finding and studying the equivalence for \var{r} was enticing.
+So when, the modulo \var{b} gives same \var{r} for a set of different numbers, finding and studying the equivalence for \var{r} was enticing.
 
 Yes, a closer look at the way modulus operator works gives the answer, there exist another  number \var{s}, \var{s} $\neq$ \var{r}, that can be substituted in the algorithm involving further recursive modulus, without affecting the final result. And the number \textit{s} can be expressed as below
 \newline $s = -(a-\ceil{a/b}*b) = \ceil{a/b}*b - a$
@@ -339,7 +339,7 @@ The values obtained during the intermediate steps captured for the algorithm no:
 \end{table}
 % ---------------------------------TABBLE 3 -----------------------------------
 
-If we compare the contents of table 2 and 3, we could see some common numbers and some of them differs. One could also observe that in the table 3 we have two more entries, that's because the algorithm takes two more recursion to complete. This is because for 
+If we compare the contents of table 2 and 3, we could see some common numbers and some of them differs. One could also observe that in the table 3 we have two more entries, that's because the algorithm takes two more recursion to complete. This is because, for 
 this combination of numbers we have received 6 times \var{s} > \var{r} and 2 times 
 \var{s} < \var{r}. But for other combination of numbers, the scenario could be different.
 
@@ -430,7 +430,7 @@ So for the smallest integer \var{b} getting reduced to 0; so the algorithm at mo
 %--------------------------TABBLE 4 -----------------------------------
 
 \section{Conclusion}
-From the table 4 contents it is clear that by using the \var{min(r,s)} is advantageous and it brings down the number of recursions. And also we have seen that, we have a substitute for \var{r} in the context of modulus arithmetic and that can be used within the intermediate steps of the algorithm to find gcd of two numbers. The running time of the loop evaluated to be $\log_4(b)$ number of iteration. The order of optimization is still under investigation and could be significant when we integers with very very long digits may be in the order of thousands! Having discussed the advantage of \moddashdash, it also should be noted that \moddashdash $\>$ is implemented with the help of existing \mod $\>$ operator and an additional subtraction. The running time of subtraction is linear however the running time of modular operation is quadratic in nature. So this additional subtraction can be well compensated by reduction in the number of intermediate steps in the recursion. There are also other highly optimized algorithm exists such as \var{Binary GCD}, \var{Lehmer's Algorithm} etc. for finding the gcd and this paper does not intent to provide a optimize algorithm for gcd. But the finding discussed in the paper can be clubbed together with other algorithm to make it more efficient.
+From the table 4 contents it is clear that by using the \var{min(r,s)} is advantageous and it brings down the number of iteration(or recursions). And also we have seen that, we have a substitute for \var{r} in the context of modulus arithmetic and that can be used within the intermediate steps of the algorithm to find gcd of two numbers. The running time of the loop evaluated to be $\log_4(b)$ number of iteration. The order of optimization is still under investigation and could be significant when we have integers with very very long digits may be in the order of thousands! Having discussed the advantage of \moddashdash, it also should be noted that \moddashdash $\>$ is implemented with the help of existing \mod $\>$ operator and an additional subtraction. The running time of subtraction is linear however the running time of modular operation is quadratic in nature. So this additional subtraction can be well compensated by reduction in the number of intermediate steps in the iteration(or recursion). There are also other highly optimized algorithm exists such as \var{Binary GCD}, \var{Lehmer's Algorithm} etc. for finding the gcd and this paper does not intent to provide a optimize algorithm for gcd. But the finding discussed in the paper can be clubbed together with other algorithm to make it more efficient.
 
 % use section* for acknowledgment
 \ifCLASSOPTIONcompsoc

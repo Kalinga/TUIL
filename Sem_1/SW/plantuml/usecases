@@ -1,0 +1,48 @@
+@startuml
+skinparam backgroundColor #EEEBDC
+/'skinparam handwritten true'/
+
+skinparam sequence {
+	ArrowColor DeepSkyBlue
+
+	LifeLineBorderColor blue
+	LifeLineBackgroundColor #A9DCDF
+	
+	ActorBorderColor black	
+	ActorBackgroundColor lightblue
+	ActorBackgroundColor<<App>> Gold
+	ActorBackgroundColor<<AppServer>> black
+	ActorFontColor DeepSkyBlue
+	ActorFontSize 17
+	ActorFontName Aapex
+	
+
+}
+
+title Various Use Cases
+left to right direction
+
+actor User
+actor App<<App>>
+actor AppServer<<AppServer>>
+
+(Sign up) as (sign_up)
+(Sign in) as (sign_in)
+
+User --> (sign_up)
+User --> (sign_in)
+User --> (give excess food)
+User --> (check food available) 
+User --> (subscribe for food available) 
+
+(sign_in)  --> App
+(sign_up)  --> App
+(give excess food) --> App
+(check food available) --> App
+(subscribe for food available) --> App
+
+(server interaction) --> AppServer
+App --> (server interaction) 
+
+@enduml
+

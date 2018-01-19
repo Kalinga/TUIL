@@ -1,0 +1,11 @@
+@startuml
+title "User Sign in"
+actor User #green
+App -> User: Presents Initial screen for sign up/sign in
+User -> App: Provides user credentials such as user id and password
+App --> AppServer: Sends the user credentials over the internet 
+database Database
+AppServer --> Database: Query for the User details and compare with the requested inforamtion
+AppServer --> App: Response from the AppServer
+App -> User: Logged in view if login was Succesful or Error message with description
+@enduml
