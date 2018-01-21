@@ -1,11 +1,26 @@
 @startuml
+
+skinparam actor {
+	FontSize 20
+}
+
+skinparam sequence {
+	ParticipantFontSize 17
+	ArrowFontSize 20
+	titleFontsize 25
+}
+
 title "User Sign Up"
 actor User #green
-App -> User: Presents Initial screen for sign up/sign in
-User -> App: Provides details for the user account creation
-App --> AppServer: Sends the collected data over the internet 
+participant App
+
+App -> User: Presents Initial \nscreen for sign up/sign in
+User -> App: Provides details \nfor the user account creation
+App --> AppServer: Sends the collected\n data over the internet 
+
 database Database
-AppServer --> Database: User is created and details are stored in the database
+
+AppServer --> Database: User is created and details \nare stored in the database
 AppServer --> App: Response from the AppServer
-App -> User: Succesful creation of User Account or Error if any
+App -> User: Succesful creation of User \nAccount or Error if any
 @enduml

@@ -2,6 +2,16 @@
 skinparam backgroundColor #EEEBDC
 /'skinparam handwritten true'/
 
+skinparam actor {
+	FontSize 20
+}
+
+skinparam sequence {
+	ParticipantFontSize 17
+	ArrowFontSize 20
+	titleFontsize 25
+}
+
 skinparam sequence {
 	ArrowColor DeepSkyBlue
 

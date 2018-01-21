@@ -1,4 +1,14 @@
 @startuml
+skinparam actor {
+	FontSize 20
+}
+
+skinparam sequence {
+	ParticipantFontSize 17
+	ArrowFontSize 20
+	titleFontsize 25
+}
+
 title "User Sign in"
 actor User #green
 App -> User: Presents Initial screen for sign up/sign in
